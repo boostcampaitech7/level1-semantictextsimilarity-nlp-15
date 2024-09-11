@@ -1,2 +1,5 @@
 *.pt
-TestCode/code/lightning_logs
+BaseCode/code/lightning_logs
+ETC/openvpn*
+BaseCode/
+data/
