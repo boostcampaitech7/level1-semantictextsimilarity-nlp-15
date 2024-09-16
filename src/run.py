@@ -5,12 +5,12 @@ import random
 import warnings
 import transformers
 
-import ensemble
+from ensemble import ensemble  # ensemble.py에서 ensemble 함수를 가져옵니다.
 from train import train
 from inference import inference
 
 def set_parser_and_model():
-    with open('config/config.yaml') as f:
+    with open('/data/ephemeral/home/team/src/config/config.yaml') as f:
         configs = yaml.safe_load(f)
 
     parser = argparse.ArgumentParser()
@@ -56,12 +56,13 @@ if __name__ == '__main__':
     torch.cuda.manual_seed_all(args.seed)
     random.seed(args.seed)
 
-    for model in model_list:
-        print("Train Start With Model Name : ", model)
-        args.model_name = model
+    # for model in model_list:
+    #     print("Train Start With Model Name : ", model)
+    #     args.model_name = model
 
-        train(args)
-        inference(args)
+    #     train(args)
+    #     inference(args)
 
     # Ensemble
-    ensemble.ensemble(args)
+    print("Starting ensemble process...")
+    ensemble(args)  # Ensure this calls the correct function in ensemble.py
