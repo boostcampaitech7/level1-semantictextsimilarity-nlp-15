@@ -1,12 +1,12 @@
 path:
-  train_path: ../data/train.csv # -> Train csv file path
-  val_path: ../data/dev.csv
-  dev_path: ../data/dev.csv
-  predict_path: ../data/test.csv # -> Test csv file path
+  train_path: data/train.csv # -> Train csv file path
+  val_path: data/dev.csv
+  dev_path: data/dev.csv
+  predict_path: data/test.csv # -> Test csv file path
 
-  checkpoint_path: ./checkpoint/ # -> Checkpoint save path
-  output_path: ./output/ # -> Output csv save path
-  submission_path: ./output/sample_submission.csv # -> Sample submission csv file path
+  checkpoint_path: checkpoint/ # -> Checkpoint save path
+  output_path: output/ # -> Output csv save path
+  submission_path: output/sample_submission.csv # -> Sample submission csv file path
 
 # List of model names to use.
 model:
@@ -21,5 +21,5 @@ hyperparameters:
   num_workers: 4
   batch_size: 16
   max_length: 128
-  max_epoch: 1
+  max_epoch: 20
   learning_rate: 1e-5
