@@ -31,11 +31,13 @@ class Model(pl.LightningModule):
     def training_step(self, batch, batch_idx):
         loss, pearson = self.batch_to_loss(batch)
         self.log("train_loss", loss, logger=True)
+        self.log("train_pearson", pearson, logger=True)
         return loss
 
     def validation_step(self, batch, batch_idx):
         loss, pearson = self.batch_to_loss(batch)
         self.log("val_loss", loss, logger=True)
+        self.log("val_pearson", pearson, logger=True)
         return loss
 
     def test_step(self, batch, batch_idx):
