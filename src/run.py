@@ -1,16 +1,17 @@
 import argparse
+import os
 import torch
 import yaml
 import random
 import warnings
 import transformers
 
-import ensemble
+from ensemble import ensemble  # ensemble.py에서 ensemble 함수를 가져옵니다.
 from train import train
 from inference import inference
 
 def set_parser_and_model():
-    with open('config/config.yaml') as f:
+    with open(os.path.join('src', 'config', 'config.yaml')) as f:
         configs = yaml.safe_load(f)
 
     parser = argparse.ArgumentParser()
@@ -36,7 +37,7 @@ def set_parser_and_model():
 
     parser.add_argument('--ensemble_list', default=configs['model']['ensemble_weight'], type=list)
 
-    model_list = list(configs['model'].values())
+    model_list = [i for i in configs['model'].values() if isinstance(i, str)]
 
     args = parser.parse_args(args=[])
 
@@ -64,4 +65,5 @@ if __name__ == '__main__':
         inference(args)
 
     # Ensemble
-    ensemble.ensemble(args)
+    print("Starting ensemble process...")
+    ensemble(args)  # Ensure this calls the correct function in ensemble.py
