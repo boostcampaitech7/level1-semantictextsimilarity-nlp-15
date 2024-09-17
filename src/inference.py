@@ -25,7 +25,7 @@ def inference(args):
     os.makedirs(os.path.join("team", "src", "model"), exist_ok=True)
 
     # 가장 좋은 체크포인트 로드
-    checkpoint_files = [f for f in os.listdir(args.checkpoint_path) if f.endswith('.ckpt')]
+    checkpoint_files = [f for f in os.listdir(args.checkpoint_path) if f.endswith('.ckpt') and model_name in f]
     if not checkpoint_files:
         raise FileNotFoundError("No checkpoint files found.")
 
@@ -62,11 +62,9 @@ def inference(args):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    file_name = f"{output_dir}/{model_name}_{current_epoch}_{val_pearson:.4f}.csv"  # 파일명 수정
-
     output = pd.read_csv(os.path.join(args.output_path, "sample_submission.csv"))
     output['target'] = predictions
-    output.to_csv(file_name, index=False)
+    output.to_csv(os.path.join(output_dir, f"{model_name}_{current_epoch}_{val_pearson:.4f}.csv"), index=False)
 
 if __name__ == "__main__":
     # seed 고정

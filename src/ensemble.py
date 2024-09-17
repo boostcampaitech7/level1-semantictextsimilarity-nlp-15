@@ -55,17 +55,9 @@ def ensemble(args):
     result = list(round(float(elem), 1) for elem in ensemble_predictions)
 
     # Save Ensemble Result
-    ensemble_name = "_".join([model.replace("/", "-") + f"_{weight}" for model, weight in zip(model_list, weights)])
+    ensemble_name = "_".join([model.replace("/", "-") + f"_{weight:.1f}" for model, weight in zip(model_list, weights)])
     submission = pd.read_csv(os.path.join(args.output_path, "sample_submission.csv"))
     submission['target'] = result
-
-    # 실제 타겟 값과 예측한 결과를 가져와 Pearson 계수를 계산
-    actual_values = submission['target'].values  # 실제 타겟 값
-    predicted_values = result  # 앙상블한 예측 값
-
-    # Pearson 계수 계산
-    pearson_corr, _ = pearsonr(actual_values, predicted_values)
-    print(f"Pearson Correlation Coefficient: {pearson_corr:.4f}")
 
     # 결과를 CSV로 저장
     submission.to_csv(os.path.join(args.output_path, f"{ensemble_name}.csv"), index=False)

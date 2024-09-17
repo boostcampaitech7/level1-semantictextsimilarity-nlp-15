@@ -37,7 +37,7 @@ def set_parser_and_model():
 
     parser.add_argument('--ensemble_list', default=configs['model']['ensemble_weight'], type=list)
 
-    model_list = list(configs['model'].values())
+    model_list = [i for i in configs['model'].values() if isinstance(i, str)]
 
     args = parser.parse_args(args=[])
 
@@ -57,13 +57,13 @@ if __name__ == '__main__':
     torch.cuda.manual_seed_all(args.seed)
     random.seed(args.seed)
 
-    for model in model_list[:1]:
+    for model in model_list:
         print("Train Start With Model Name : ", model)
         args.model_name = model
 
         train(args)
         inference(args)
 
-    # # Ensemble
-    # print("Starting ensemble process...")
-    # ensemble(args)  # Ensure this calls the correct function in ensemble.py
+    # Ensemble
+    print("Starting ensemble process...")
+    ensemble(args)  # Ensure this calls the correct function in ensemble.py
