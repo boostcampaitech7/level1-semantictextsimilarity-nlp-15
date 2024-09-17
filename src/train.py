@@ -1,21 +1,23 @@
-import os
 import argparse
+import os
 import random
+import sys
 import yaml
 
 import pytorch_lightning as pl
 import torch
 
-from team.src.util import util
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.util import util
+from src.model import model
 
 def train(args):
     model_name = args.model_name.replace("/", "-")
     epoch = args.max_epoch
 
     # 모델 파일 저장 전 디렉토리 확인 및 생성
-    model_dir = 'team/src/model'
-    if not os.path.exists(model_dir):
-        os.makedirs(model_dir)
+    os.makedirs(os.path.join("team", "src", "model"), exist_ok=True)
 
     dataloader = util.Dataloader(
         args.model_name, args.batch_size, args.max_length, args.num_workers, args.train_path, args.val_path, args.dev_path, args.predict_path
@@ -37,8 +39,6 @@ def train(args):
         mode="max"
     )
 
-    from team.src.model import model
-
     model_instance = model.Model(args.model_name, args.num_labels, args.learning_rate)
     trainer = pl.Trainer(
         accelerator="gpu",
@@ -54,16 +54,14 @@ def train(args):
     # Get the best val_pearson from the checkpoint
     val_pearson = trainer.callback_metrics["val_pearson"].item()
     current_epoch = trainer.current_epoch  # 현재 에폭 가져오기
-    torch.save(model_instance, f'team/src/model/{model_name}_{current_epoch}_{val_pearson:.4f}.pt')
+    torch.save(model_instance, os.path.join('src', 'model', f'{model_name}_{current_epoch}_{val_pearson:.4f}.ckpt'))
 
 def val_only(args):
     # This Function Only takes validation util and show pearson score on a console
     model_name = args.model_name.replace("/", "-")
 
     # 모델 파일 저장 전 디렉토리 확인 및 생성
-    model_dir = 'team/src/model'
-    if not os.path.exists(model_dir):
-        os.makedirs(model_dir)
+    os.makedirs(os.path.join("team", "src", "model"), exist_ok=True)
         
     dataloader = util.Dataloader(
         args.model_name, args.batch_size, args.max_length, args.num_workers, args.train_path, args.val_path, args.dev_path, args.predict_path
@@ -101,7 +99,7 @@ def val_only(args):
     # 현재 에폭 수를 체크포인트에서 직접 가져오는 방식으로 변경
     current_epoch = int(checkpoint_path.split('_')[1])  # filename에서 epoch 추출
 
-    model = torch.load(f'team/src/model/{model_name}_{current_epoch}_{val_pearson:.4f}.pt')
+    model = torch.load(os.path.join('src', 'model', f'{model_name}_{current_epoch}_{val_pearson:.4f}.ckpt'))
     trainer.test(model=model, datamodule=dataloader)
 
 if __name__ == "__main__":
@@ -114,29 +112,29 @@ if __name__ == "__main__":
     torch.set_float32_matmul_precision('medium')
     parser = argparse.ArgumentParser()
 
+    parser.add_argument('--seed')
     parser.add_argument('--model_name', default='snunlp/KR-ELECTRA-discriminator', type=str)
-    parser.add_argument('--batch_size', default=32, type=int)
+    parser.add_argument('--batch_size', default=16, type=int)
     parser.add_argument('--max_length', default=128, type=int)
     parser.add_argument('--max_epoch', default=20, type=int)
     parser.add_argument('--shuffle', default=True)
     parser.add_argument('--learning_rate', default=1e-5, type=float)
-    parser.add_argument('--train_path', default='/data/ephemeral/home/team/data/train.csv')
-    parser.add_argument('--val_path', default='/data/ephemeral/home/team/data/dev.csv')
-    parser.add_argument('--dev_path', default='/data/ephemeral/home/team/data/dev.csv')
-    parser.add_argument('--predict_path', default='/data/ephemeral/home/team/data/test.csv')
-    parser.add_argument('--checkpoint_path', default='/data/ephemeral/home/team/checkpoint', type=str)
+    parser.add_argument('--train_path', default='data/train.csv')
+    parser.add_argument('--val_path', default='data/dev.csv')
+    parser.add_argument('--dev_path', default='data/dev.csv')
+    parser.add_argument('--predict_path', default='data/test.csv')
+    parser.add_argument('--checkpoint_path', default='checkpoint', type=str)
     parser.add_argument('--num_labels', default=1, type=int)
     parser.add_argument('--num_workers', default=4, type=int)
     args = parser.parse_args(args=[])
 
-    # train(args)
-
-    with open('/data/ephemeral/home/team/src/config/config.yaml') as f:
+    with open(os.path.join('src', 'config', 'config.yaml')) as f:
         configs = yaml.safe_load(f)
 
     model_list = list(configs['model'].values())
 
-    for model in model_list:
-        print("***** Pearson Score Start *****\nModel Name : ", model)
-        args.model_name = model
-        val_only(args)
+    for m in model_list:
+        print("***** Pearson Score Start *****\nModel Name : ", m)
+        args.model_name = m
+        train(args)
+        # val_only(args)
