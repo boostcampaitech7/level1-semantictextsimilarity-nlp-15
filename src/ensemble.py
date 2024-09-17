@@ -1,13 +1,16 @@
-import pandas as pd
-import yaml
 import argparse
-import torch
-from scipy.stats import pearsonr  # Pearson 계수를 계산하기 위한 모듈 추가
 import glob
+import os
+import torch
+
+import pandas as pd
+from scipy.stats import pearsonr  # Pearson 계수를 계산하기 위한 모듈 추가
+import yaml
+
 
 def ensemble(args):
     # Get Model List from config.yaml
-    with open('/data/ephemeral/home/team/src/config/config.yaml') as f:
+    with open(os.path.join('src', 'config', 'config.yaml')) as f:
         configs = yaml.safe_load(f)
 
     # 모델 이름만 가져오기
@@ -53,7 +56,7 @@ def ensemble(args):
 
     # Save Ensemble Result
     ensemble_name = "_".join([model.replace("/", "-") + f"_{weight}" for model, weight in zip(model_list, weights)])
-    submission = pd.read_csv(args.output_path + "/sample_submission.csv")
+    submission = pd.read_csv(os.path.join(args.output_path, "sample_submission.csv"))
     submission['target'] = result
 
     # 실제 타겟 값과 예측한 결과를 가져와 Pearson 계수를 계산
@@ -65,7 +68,7 @@ def ensemble(args):
     print(f"Pearson Correlation Coefficient: {pearson_corr:.4f}")
 
     # 결과를 CSV로 저장
-    submission.to_csv(args.output_path + f"/{ensemble_name}.csv", index=False)
+    submission.to_csv(os.path.join(args.output_path, f"{ensemble_name}.csv"), index=False)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -80,12 +83,12 @@ if __name__ == '__main__':
     parser.add_argument('--max_epoch', default=20, type=int)
     parser.add_argument('--learning_rate', default=1e-5, type=float)
 
-    parser.add_argument('--train_path', default='/data/ephemeral/home/team/data/train.csv')
-    parser.add_argument('--val_path', default='/data/ephemeral/home/team/data/dev.csv')
-    parser.add_argument('--dev_path', default='/data/ephemeral/home/team/data/dev.csv')
-    parser.add_argument('--predict_path', default='/data/ephemeral/home/team/checkpoint')
-    parser.add_argument('--output_path', default='/data/ephemeral/home/team/output')
-    parser.add_argument('--checkpoint_path', default='/data/ephemeral/home/team/checkpoint')
+    parser.add_argument('--train_path', default='data/train.csv')
+    parser.add_argument('--val_path', default='data/dev.csv')
+    parser.add_argument('--dev_path', default='data/dev.csv')
+    parser.add_argument('--predict_path', default='checkpoint') 
+    parser.add_argument('--output_path', default='output')
+    parser.add_argument('--checkpoint_path', default='checkpoint')
 
     args = parser.parse_args(args=[])
 

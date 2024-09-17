@@ -1,4 +1,5 @@
 import argparse
+import os
 import torch
 import yaml
 import random
@@ -10,7 +11,7 @@ from train import train
 from inference import inference
 
 def set_parser_and_model():
-    with open('/data/ephemeral/home/team/src/config/config.yaml') as f:
+    with open(os.path.join('src', 'config', 'config.yaml')) as f:
         configs = yaml.safe_load(f)
 
     parser = argparse.ArgumentParser()
@@ -56,13 +57,13 @@ if __name__ == '__main__':
     torch.cuda.manual_seed_all(args.seed)
     random.seed(args.seed)
 
-    # for model in model_list:
-    #     print("Train Start With Model Name : ", model)
-    #     args.model_name = model
+    for model in model_list[:1]:
+        print("Train Start With Model Name : ", model)
+        args.model_name = model
 
-    #     train(args)
-    #     inference(args)
+        train(args)
+        inference(args)
 
-    # Ensemble
-    print("Starting ensemble process...")
-    ensemble(args)  # Ensure this calls the correct function in ensemble.py
+    # # Ensemble
+    # print("Starting ensemble process...")
+    # ensemble(args)  # Ensure this calls the correct function in ensemble.py

@@ -1,13 +1,17 @@
 import argparse
-import pandas as pd
 import random
 import yaml
 import os
+import sys
+
+import pandas as pd
 import pytorch_lightning as pl
 import torch
 
-from team.src.util import util
-from team.src.model import model  # 모델 클래스를 가져옵니다.
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.util import util
+from src.model import model  # 모델 클래스를 가져옵니다.
 
 def inference(args):
     model_name = args.model_name.replace("/", "-")
@@ -18,9 +22,7 @@ def inference(args):
     )
 
     # 모델 파일 저장 전 디렉토리 확인 및 생성
-    model_dir = 'team/src/model'
-    if not os.path.exists(model_dir):
-        os.makedirs(model_dir)
+    os.makedirs(os.path.join("team", "src", "model"), exist_ok=True)
 
     # 가장 좋은 체크포인트 로드
     checkpoint_files = [f for f in os.listdir(args.checkpoint_path) if f.endswith('.ckpt')]
@@ -62,7 +64,7 @@ def inference(args):
 
     file_name = f"{output_dir}/{model_name}_{current_epoch}_{val_pearson:.4f}.csv"  # 파일명 수정
 
-    output = pd.read_csv('/data/ephemeral/home/team/src/output/sample_submission.csv')
+    output = pd.read_csv(os.path.join(args.output_path, "sample_submission.csv"))
     output['target'] = predictions
     output.to_csv(file_name, index=False)
 
@@ -76,7 +78,7 @@ if __name__ == "__main__":
     torch.set_float32_matmul_precision('medium')
     parser = argparse.ArgumentParser()
 
-    with open('/data/ephemeral/home/team/src/config/config.yaml') as f:
+    with open(os.path.join("src", "config", "config.yaml")) as f:
         configs = yaml.safe_load(f)
 
     parser.add_argument('--model_name', default='snunlp/KR-ELECTRA-discriminator', type=str)
@@ -85,12 +87,12 @@ if __name__ == "__main__":
     parser.add_argument('--max_epoch', default=1, type=int)
     parser.add_argument('--shuffle', default=True)
     parser.add_argument('--learning_rate', default=1e-5, type=float)
-    parser.add_argument('--train_path', default='/data/ephemeral/home/team/data/train.csv')
-    parser.add_argument('--val_path', default='/data/ephemeral/home/team/data/dev.csv')
-    parser.add_argument('--dev_path', default='/data/ephemeral/home/team/data/dev.csv')
-    parser.add_argument('--predict_path', default='/data/ephemeral/home/team/data/test.csv')
-    parser.add_argument('--output_path', default='/data/ephemeral/home/team/src/output')
-    parser.add_argument('--checkpoint_path', default='/data/ephemeral/home/team/checkpoint')
+    parser.add_argument('--train_path', default='data/train.csv')
+    parser.add_argument('--val_path', default='data/dev.csv')
+    parser.add_argument('--dev_path', default='data/dev.csv')
+    parser.add_argument('--predict_path', default='data/test.csv')
+    parser.add_argument('--output_path', default='src/output')
+    parser.add_argument('--checkpoint_path', default='checkpoint')
     parser.add_argument('--num_labels', default=1, type=int)
     parser.add_argument('--num_workers', default=4, type=int)
     args = parser.parse_args(args=[])
