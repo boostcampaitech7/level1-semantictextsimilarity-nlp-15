@@ -17,8 +17,20 @@ class Tokenizer(Dataset):
 
 
 class Dataset(Dataset):
-    def __init__(self, tokenizer, path, predict=False):
-        self.data = pd.read_csv(path)
+    def __init__(self, tokenizer, path, aug_list, predict=False):
+        self.data = None
+
+        if aug_list is not None and "swap" in aug_list:
+            df = pd.read_csv(path)
+            swap_df = pd.read_csv(path)
+
+            swap_df['sentence_1'], swap_df['sentence_2'] = swap_df['sentence_2'], swap_df['sentence_1']
+
+            self.data = pd.concat([df, swap_df])
+
+        else:
+            self.data = pd.read_csv(path)
+
         self.tokenizer = tokenizer
         self.predict = predict
 
@@ -38,7 +50,38 @@ class Dataset(Dataset):
         return mapper
 
 class Dataloader(pl.LightningDataModule):
-    def __init__(self, model_name, batch_size, max_length, num_worker, train_path, val_path, dev_path, predict_path):
+    def __init__(self, model_name, batch_size, max_length, num_worker, train_path, val_path, dev_path, predict_path, aug_list=None):
+        super().__init__()
+        self.tokenizer = Tokenizer(model_name, max_length)
+        self.batch_size = batch_size
+        self.num_worker = num_worker
+
+        self.train_path = train_path
+        self.val_path = val_path
+        self.dev_path = dev_path
+        self.predict_path = predict_path
+
+        self.collate = DataCollatorWithPadding(tokenizer=self.tokenizer.tokenizer)
+
+        self.train_dataset = Dataset(self.tokenizer.tokenizer, self.train_path, aug_list)
+        self.val_dataset = Dataset(self.tokenizer.tokenizer, self.val_path, aug_list)
+        self.dev_dataset = Dataset(self.tokenizer.tokenizer, self.dev_path, aug_list)
+        self.predict_dataset = Dataset(self.tokenizer.tokenizer, self.predict_path, aug_list, predict=True)
+
+    def train_dataloader(self):
+        return torch.utils.data.DataLoader(self.train_dataset, persistent_workers=True, batch_size=self.batch_size, shuffle=True, num_workers=self.num_worker, collate_fn=self.collate)
+
+    def val_dataloader(self):
+        return torch.utils.data.DataLoader(self.val_dataset, persistent_workers=True, batch_size=self.batch_size, num_workers=self.num_worker, collate_fn=self.collate)
+
+    def test_dataloader(self):
+        return torch.utils.data.DataLoader(self.dev_dataset, persistent_workers=True, batch_size=self.batch_size, num_workers=self.num_worker, collate_fn=self.collate)
+
+    def predict_dataloader(self):
+        return torch.utils.data.DataLoader(self.predict_dataset, persistent_workers=True, batch_size=self.batch_size, num_workers=self.num_worker, collate_fn=self.collate)
+
+class EnsembleDataloader(pl.LightningDataModule):
+    def __init__(self, model_list, batch_size, max_length, num_worker, train_path, val_path, dev_path, predict_path):
         super().__init__()
         self.tokenizer = Tokenizer(model_name, max_length)
         self.batch_size = batch_size

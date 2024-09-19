@@ -13,6 +13,10 @@ model:
   model_name_1: beomi/KcELECTRA-base
   model_name_2: snunlp/KR-ELECTRA-discriminator
   model_name_3: jhgan/ko-sroberta-multitask
+  #model_name_4: sentence-transformers/all-MiniLM-L6-v2
+  model_name_5: FacebookAI/xlm-roberta-large
+  model_name_6: monologg/koelectra-base-v3-discriminator
+  model_name_7: kakaobank/kf-deberta-base
   ensemble_weight: [0.3, 0.3, 0.4]
 
 hyperparameters:
@@ -21,5 +25,5 @@ hyperparameters:
   num_workers: 4
   batch_size: 16
   max_length: 128
-  max_epoch: 1
+  max_epoch: 20
   learning_rate: 1e-5

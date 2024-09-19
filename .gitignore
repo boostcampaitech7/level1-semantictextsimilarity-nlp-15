@@ -7,3 +7,4 @@ BaseCode/
 src/lightning_logs/
 src/checkpoint/
 data/*.csv
+src/output/*.csv

@@ -1,23 +1,29 @@
+import os
 import argparse
 import random
+
+import pandas as pd
 import yaml
 
 import pytorch_lightning as pl
 import torch
 
 from util import util
+from transformers import AutoModelForSequenceClassification, AutoModel, AutoTokenizer
 
 def train(args):
     model_name = args.model_name.replace("/", "-")
     epoch = args.max_epoch
 
+    aug_list = {"swap"}
+
     dataloader = util.Dataloader(
-        args.model_name, args.batch_size, args.max_length, args.num_workers, args.train_path, args.val_path, args.dev_path, args.predict_path
+        args.model_name, args.batch_size, args.max_length, args.num_workers, args.train_path, args.val_path, args.dev_path, args.predict_path,
+        aug_list=aug_list
     )
 
     early_stopping = pl.callbacks.EarlyStopping(
         monitor="val_loss",
-        patience=3,
         mode="min"
     )
 
