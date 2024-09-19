@@ -6,4 +6,5 @@ BaseCode/code/lightning_logs
 BaseCode/
 src/lightning_logs/
 src/checkpoint/
+src/output/*.csv
 data/*.csv
