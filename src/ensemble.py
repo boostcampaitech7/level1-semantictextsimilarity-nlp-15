@@ -3,13 +3,9 @@ import yaml
 import argparse
 import torch
 
-def ensemble(args):
+def ensemble(args, model_list, sum=False):
     # Get Model List from config.yaml
-
-    with open('config/config.yaml') as f:
-        configs = yaml.safe_load(f)
-
-    model_list = list(configs['model'].values())
+    flag = None
     epoch = args.max_epoch
 
     csvs = []
@@ -27,9 +23,21 @@ def ensemble(args):
 
     predictions = torch.stack([torch.Tensor(csv.values) for csv in csvs], dim=1)
 
-    ensemble_predictions = predictions * torch.Tensor(weights)
-    ensemble_predictions = ensemble_predictions.sum(dim=1)
-    ensemble_predictions = torch.clamp(ensemble_predictions, min=0, max=5)
+    # Do Weighted Mean if sum is False
+    if not sum and len(weights) == len(model_list):
+        flag = True
+
+        ensemble_predictions = predictions * torch.Tensor(weights)
+        ensemble_predictions = ensemble_predictions.sum(dim=1)
+        ensemble_predictions = torch.clamp(ensemble_predictions, min=0, max=5)
+
+    # Do Weighted Sum if sum is True
+    else:
+        flag = False
+
+        ensemble_predictions = torch.sum(predictions, dim=1)
+        ensemble_predictions /= len(model_list)
+        ensemble_predictions = torch.clamp(ensemble_predictions, min=0, max=5)
 
     result = list(round(float(elem), 1) for elem in ensemble_predictions)
 
@@ -37,7 +45,7 @@ def ensemble(args):
     name = ""
     for i, elem in enumerate(model_list):
         name += elem.replace("/", "-")
-        name += "_" + str(weights[i]) + "_"
+        name += "_" + str(weights[i] if flag else 1) + "_"
 
     submission = pd.read_csv(args.output_path + "/sample_submission.csv")
     submission['target'] = result

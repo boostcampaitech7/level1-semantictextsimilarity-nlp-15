@@ -1,3 +1,4 @@
+import os
 import argparse
 import torch
 import yaml
@@ -36,7 +37,7 @@ def set_parser_and_model():
 
     parser.add_argument('--ensemble_list', default=configs['model']['ensemble_weight'], type=list)
 
-    model_list = list(configs['model'].values())
+    model_list = list(configs['model'].values())[:-1]
 
     args = parser.parse_args(args=[])
 
@@ -60,8 +61,12 @@ if __name__ == '__main__':
         print("Train Start With Model Name : ", model)
         args.model_name = model
 
+        if os.path.exists(f"model/{args.model_name.replace('/', '-')}_{args.max_epoch}.pt"):
+            print(f"Model : {model} with Epoch : {args.max_epoch} file already Exists")
+            continue
+
         train(args)
         inference(args)
 
     # Ensemble
-    ensemble.ensemble(args)
+    ensemble.ensemble(args, model_list, sum=True)
