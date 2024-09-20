@@ -17,7 +17,12 @@ model:
   model_name_5: FacebookAI/xlm-roberta-large
   model_name_6: monologg/koelectra-base-v3-discriminator
   model_name_7: kakaobank/kf-deberta-base
-  ensemble_weight: [0.3, 0.3, 0.4]
+
+  model_name_8: intfloat/multilingual-e5-large-instruct
+  #model_name_9: Jaume/gemma-2b-embeddings # 2 Billion Param Model, Very big
+  #model_name_10: bespin-global-klue-sroberta-base-continue-learning-by-mnr
+
+  ensemble_weight: [0.1, 0.15, 0.1, 0.45, 0.05, 0.05, 0.1]
 
 hyperparameters:
   seed: 0
