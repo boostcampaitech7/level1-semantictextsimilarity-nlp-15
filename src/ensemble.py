@@ -44,7 +44,7 @@ def ensemble(args, model_list, sum=False):
     # Save Ensemble Result
     name = ""
     for i, elem in enumerate(model_list):
-        name += elem.replace("/", "-")
+        name += elem.replace("/", "-").split("-")[0]
         name += "_" + str(weights[i] if flag else 1) + "_"
 
     submission = pd.read_csv(args.output_path + "/sample_submission.csv")
