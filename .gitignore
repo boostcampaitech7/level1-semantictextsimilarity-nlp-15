@@ -8,4 +8,3 @@ src/lightning_logs/
 src/checkpoint/
 src/output/*.csv
 data/*.csv
-src/output/*.csv

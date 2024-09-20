@@ -21,8 +21,7 @@ def train(args):
     os.makedirs(os.path.join("team", "src", "model"), exist_ok=True)
 
     dataloader = util.Dataloader(
-        args.model_name, args.batch_size, args.max_length, args.num_workers, args.train_path, args.val_path, args.dev_path, args.predict_path,
-        aug_list=aug_list
+        args.model_name, args.batch_size, args.max_length, args.num_workers, args.train_path, args.val_path, args.dev_path, args.predict_path
     )
 
     early_stopping = pl.callbacks.EarlyStopping(
