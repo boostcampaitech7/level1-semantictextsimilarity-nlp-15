@@ -12,7 +12,7 @@ from train import train
 from inference import inference
 
 def set_parser_and_model():
-    with open(os.path.join('config', 'config.yaml')) as f:
+    with open(os.path.join('config.yaml')) as f:
         configs = yaml.safe_load(f)
 
     parser = argparse.ArgumentParser()
@@ -29,12 +29,12 @@ def set_parser_and_model():
     parser.add_argument('--max_epoch', default=configs['hyperparameters']['max_epoch'], type=int)
     parser.add_argument('--learning_rate', default=configs['hyperparameters']['learning_rate'], type=float)
 
-    parser.add_argument('--train_path', default=configs['path']['train_path'], type=str)
-    parser.add_argument('--val_path', default=configs['path']['val_path'], type=str)
-    parser.add_argument('--dev_path', default=configs['path']['dev_path'], type=str)
-    parser.add_argument('--predict_path', default=configs['path']['predict_path'], type=str)
-    parser.add_argument('--output_path', default=configs['path']['output_path'], type=str)
-    parser.add_argument('--checkpoint_path', default=configs['path']['checkpoint_path'], type=str)
+    parser.add_argument('--train_path', default=os.path.join(configs['path']['train_path']), type=str)
+    parser.add_argument('--val_path', default=os.path.join(configs['path']['val_path']), type=str)
+    parser.add_argument('--dev_path', default=os.path.join(configs['path']['dev_path']), type=str)
+    parser.add_argument('--predict_path', default=os.path.join(configs['path']['predict_path']), type=str)
+    parser.add_argument('--output_path', default=os.path.join(configs['path']['output_path']), type=str)
+    parser.add_argument('--checkpoint_path', default=os.path.join(configs['path']['checkpoint_path']), type=str)
 
     parser.add_argument('--ensemble_list', default=configs['model']['ensemble_weight'], type=list)
 

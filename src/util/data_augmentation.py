@@ -10,6 +10,6 @@ def line_swap(path):
     return df
 
 if __name__ == '__main__':
-    df = line_swap('../../data/train.csv')
+    df = line_swap('../data/train.csv')
 
     print(df)

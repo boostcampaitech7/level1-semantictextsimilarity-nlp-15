@@ -10,8 +10,8 @@ import torch
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.util import util
-from src.model import model  # 모델 클래스를 가져옵니다.
+from util import util
+from model import model  # 모델 클래스를 가져옵니다.
 
 def inference(args):
     model_name = args.model_name.replace("/", "-")
