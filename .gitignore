@@ -4,6 +4,8 @@
 ETC/openvpn*
 BaseCode/code/lightning_logs
 BaseCode/
-src/lightning_logs/
-src/checkpoint/
+src/model/*
+src/lightning_logs/*
+src/checkpoint/*
+src/output/*
 data/*.csv
