@@ -1,5 +1,6 @@
 import os
 import argparse
+import glob
 
 import torch
 import yaml
@@ -34,15 +35,30 @@ def set_parser_and_model():
     parser.add_argument('--dev_path', default=os.path.join(configs['path']['dev_path']), type=str)
     parser.add_argument('--predict_path', default=os.path.join(configs['path']['predict_path']), type=str)
     parser.add_argument('--output_path', default=os.path.join(configs['path']['output_path']), type=str)
+    parser.add_argument('--ensemble_output_path', default=os.path.join(configs['path']['ensemble_output_path']), type=str)
     parser.add_argument('--checkpoint_path', default=os.path.join(configs['path']['checkpoint_path']), type=str)
 
     parser.add_argument('--ensemble_list', default=configs['model']['ensemble_weight'], type=list)
+    parser.add_argument('--aug_list', default=configs['aug_list'])
 
     model_list = [i for i in configs['model'].values() if isinstance(i, str)]
 
     args = parser.parse_args(args=[])
 
     return args, model_list
+
+def check_model_existence(args):
+    epoch = args.max_epoch
+    model_name = args.model_name.replace("/", "-")
+
+    # find model file by wildcard pattern
+    file_pattern = f'model/{model_name}_{epoch}_*.ckpt'
+    file_pattern2 = f'checkpoint/{model_name}_epoch={epoch-1}_*.ckpt'
+
+    matching_files = glob.glob(file_pattern)
+    matching_files2 = glob.glob(file_pattern2)
+
+    return matching_files, matching_files2
 
 if __name__ == '__main__':
     args, model_list = set_parser_and_model()
@@ -62,8 +78,31 @@ if __name__ == '__main__':
         print("Train Start With Model Name : ", model)
         args.model_name = model
 
-        train(args)
-        inference(args)
+        existence, existence_checkpoint = check_model_existence(args)
+
+        if not existence:
+            train(args)
+            inference(args)
+
+        else:
+            #Ask user if they want to retrain the model
+            print(f"Model {model} already exists. Do you want to retrain it? (y/n)")
+            response = input()
+
+            while response.lower() not in ['y', 'n']:
+                print("Invalid response. Please enter 'y' or 'n'.")
+                response = input()
+
+            if response.lower() == 'y':
+                # remove existing model
+                for file in existence:
+                    os.remove(file)
+
+                for file in existence_checkpoint:
+                    os.remove(file)
+
+                train(args)
+                inference(args)
 
     # Ensemble
     print("Starting ensemble process...")

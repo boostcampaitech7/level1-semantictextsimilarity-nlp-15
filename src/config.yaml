@@ -6,6 +6,7 @@ path:
 
   checkpoint_path: checkpoint/ # -> Checkpoint save path
   output_path: output/ # -> Output csv save path
+  ensemble_output_path: csv_ensemble/ # -> Output csv save path
   submission_path: output/sample_submission.csv # -> Sample submission csv file path
 
 # List of model names to use.
@@ -22,7 +23,19 @@ model:
 #  model_name_9: Jaume/gemma-2b-embeddings # 2 Billion Param Model, Very big
 #  model_name_10: bespin-global-klue-sroberta-base-continue-learning-by-mnr
 
-  ensemble_weight: [0.1, 0.15, 0.1, 0.45, 0.05, 0.05, 0.1]
+  ensemble_weight: [1]
+
+aug_list:
+    beomi/KcELECTRA-base: [swap]
+    snunlp/KR-ELECTRA-discriminator: [swap]
+    jhgan/ko-sroberta-multitask: [swap]
+    sentence-transformers/all-MiniLM-L6-v2: [swap]
+    FacebookAI/xlm-roberta-large: [swap, delete]
+    monologg/koelectra-base-v3-discriminator: [swap, substitute]
+    kakaobank/kf-deberta-base: [swap, insert]
+    intfloat/multilingual-e5-large-instruct: [delete, substitute]
+    Jaume/gemma-2b-embeddings: [delete, insert]
+    bespin-global-klue-sroberta-base-continue-learning-by-mnr: [substitute, insert]
 
 hyperparameters:
   seed: 0
