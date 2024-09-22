@@ -1,6 +1,5 @@
 import os
 import argparse
-import os
 import random
 import sys
 import yaml
@@ -8,10 +7,10 @@ import yaml
 import pytorch_lightning as pl
 import torch
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from util import util
+from model import model
 
-from src.util import util
-from src.model import model
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 def train(args):
     model_name = args.model_name.replace("/", "-")
@@ -55,7 +54,8 @@ def train(args):
     # Get the best val_pearson from the checkpoint
     val_pearson = trainer.callback_metrics["val_pearson"].item()
     current_epoch = trainer.current_epoch  # 현재 에폭 가져오기
-    torch.save(model_instance, os.path.join('src', 'model', f'{model_name}_{current_epoch}_{val_pearson:.4f}.ckpt'))
+
+    torch.save(model_instance, os.path.join('model', f'{model_name}_{current_epoch}_{val_pearson:.4f}.ckpt'))
 
 def val_only(args):
     # This Function Only takes validation util and show pearson score on a console

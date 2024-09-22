@@ -12,7 +12,7 @@ from train import train
 from inference import inference
 
 def set_parser_and_model():
-    with open(os.path.join('src', 'config', 'config.yaml')) as f:
+    with open(os.path.join('config', 'config.yaml')) as f:
         configs = yaml.safe_load(f)
 
     parser = argparse.ArgumentParser()
