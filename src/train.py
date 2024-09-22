@@ -9,8 +9,8 @@ import torch
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.util import util
-from src.model import model
+from util import util
+from model import model
 
 def train(args):
     model_name = args.model_name.replace("/", "-")
