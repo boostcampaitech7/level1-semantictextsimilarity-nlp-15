@@ -10,7 +10,7 @@ import yaml
 
 def ensemble(args):
     # Get Model List from config.yaml
-    with open(os.path.join('src', 'config', 'config.yaml')) as f:
+    with open(os.path.join('config.yaml')) as f:
         configs = yaml.safe_load(f)
 
     # 모델 이름만 가져오기
@@ -35,6 +35,7 @@ def ensemble(args):
             # 마지막 열을 가져옴
             label = pd.read_csv(matching_files[-1]).iloc[:, -1]  # 가장 최근 파일 선택
             csvs.append(label)
+
         except Exception as e:
             print(f"Error reading file: {e}. Skipping this model.")
             continue
@@ -50,7 +51,7 @@ def ensemble(args):
     # 가중치를 적용하여 앙상블 예측 계산
     ensemble_predictions = predictions * weights
     ensemble_predictions = ensemble_predictions.sum(dim=1)
-    ensemble_predictions = torch.clamp(ensemble_predictions, min=0, max=5)  # 예측값 범위 조정
+    #ensemble_predictions = torch.clamp(ensemble_predictions, min=0, max=5)  # 예측값 범위 조정
 
     result = list(round(float(elem), 1) for elem in ensemble_predictions)
 
@@ -60,7 +61,7 @@ def ensemble(args):
     submission['target'] = result
 
     # 결과를 CSV로 저장
-    submission.to_csv(os.path.join(args.output_path, f"{ensemble_name}.csv"), index=False)
+    submission.to_csv(os.path.join(args.ensemble_output_path, f"{ensemble_name}.csv"), index=False)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
