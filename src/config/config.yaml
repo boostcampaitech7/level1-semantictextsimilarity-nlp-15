@@ -10,9 +10,9 @@ path:
 
 # List of model names to use.
 model:
-#  model_name_1: beomi/KcELECTRA-base
+  model_name_1: beomi/KcELECTRA-base
   model_name_2: snunlp/KR-ELECTRA-discriminator
-#  model_name_3: jhgan/ko-sroberta-multitask
+  model_name_3: jhgan/ko-sroberta-multitask
   ensemble_weight: [0.3, 0.3, 0.4]
 
 hyperparameters:
