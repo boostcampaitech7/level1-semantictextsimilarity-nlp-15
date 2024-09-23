@@ -2,6 +2,7 @@ import argparse
 import glob
 import os
 import torch
+import time
 
 import pandas as pd
 from scipy.stats import pearsonr  # Pearson 계수를 계산하기 위한 모듈 추가
@@ -49,14 +50,15 @@ def ensemble(args):
     predictions = torch.stack([torch.Tensor(csv.values) for csv in csvs], dim=1)
 
     # 가중치를 적용하여 앙상블 예측 계산
-    ensemble_predictions = predictions * weights
-    ensemble_predictions = ensemble_predictions.sum(dim=1)
+    ensemble_predictions = (predictions * weights).sum(dim=1) if len(weights) == len(predictions) else predictions.mean(dim=1)
     #ensemble_predictions = torch.clamp(ensemble_predictions, min=0, max=5)  # 예측값 범위 조정
 
     result = list(round(float(elem), 1) for elem in ensemble_predictions)
 
     # Save Ensemble Result
-    ensemble_name = "_".join([model.replace("/", "-") + f"_{weight:.1f}" for model, weight in zip(model_list, weights)])
+    # ensemble_name = "_".join([model.replace("/", "-") + f"_{weight:.1f}" for model, weight in zip(model_list, weights)])
+    ensemble_name = time.strftime("%Y%m%d_%H%M%S")
+
     submission = pd.read_csv(os.path.join(args.output_path, "sample_submission.csv"))
     submission['target'] = result
 

@@ -52,8 +52,8 @@ def check_model_existence(args):
     model_name = args.model_name.replace("/", "-")
 
     # find model file by wildcard pattern
-    file_pattern = f'model/{model_name}_{epoch}_*.ckpt'
-    file_pattern2 = f'checkpoint/{model_name}_epoch={epoch-1}_*.ckpt'
+    file_pattern = f'model/{model_name}_*.ckpt'
+    file_pattern2 = f'checkpoint/{model_name}_*.ckpt'
 
     matching_files = glob.glob(file_pattern)
     matching_files2 = glob.glob(file_pattern2)
@@ -62,6 +62,7 @@ def check_model_existence(args):
 
 if __name__ == '__main__':
     args, model_list = set_parser_and_model()
+    flag = None
 
     transformers.logging.set_verbosity_error()
     warnings.filterwarnings("ignore", ".*does not have many workers.*")
@@ -86,15 +87,34 @@ if __name__ == '__main__':
 
         else:
             #Ask user if they want to retrain the model
-            print(f"Model {model} already exists. Do you want to retrain it? (y/n)")
-            response = input()
+            response = None
 
-            while response.lower() not in ['y', 'n']:
-                print("Invalid response. Please enter 'y' or 'n'.")
+            if flag is None:
+                print(f"Model {model} already exists. Do you want to retrain it? (y/n/all/never)")
                 response = input()
 
-            if response.lower() == 'y':
-                # remove existing model
+                while response.lower() not in ['y', 'n', 'all', 'never']:
+                    print("Invalid response. Please enter (y/n/all/never).")
+                    response = input()
+
+                if response.lower() == 'never':
+                    flag = False
+
+                elif response.lower() == 'all':
+                    flag = True
+
+                if response.lower() == 'y':
+                    # remove existing model
+                    for file in existence:
+                        os.remove(file)
+
+                    for file in existence_checkpoint:
+                        os.remove(file)
+
+                    train(args)
+                    inference(args)
+
+            elif flag:
                 for file in existence:
                     os.remove(file)
 
@@ -103,6 +123,10 @@ if __name__ == '__main__':
 
                 train(args)
                 inference(args)
+
+            else:
+                print(f"Skipping model {model}.")
+                continue
 
     # Ensemble
     print("Starting ensemble process...")
