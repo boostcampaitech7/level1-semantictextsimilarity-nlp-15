@@ -11,19 +11,22 @@ path:
 
 # List of model names to use.
 model:
-#  model_name_1: beomi/KcELECTRA-base
-  model_name_2: snunlp/KR-ELECTRA-discriminator
+  model_name_1: beomi/KcELECTRA-base
+#  model_name_2: snunlp/KR-ELECTRA-discriminator
 #  model_name_3: jhgan/ko-sroberta-multitask
 #  #model_name_4: sentence-transformers/all-MiniLM-L6-v2
 #  model_name_5: FacebookAI/xlm-roberta-large
 #  model_name_6: monologg/koelectra-base-v3-discriminator
-#  model_name_7: kakaobank/kf-deberta-base
-
+##  model_name_7: kakaobank/kf-deberta-base
+#
 #  model_name_8: intfloat/multilingual-e5-large-instruct
-#  model_name_9: Jaume/gemma-2b-embeddings # 2 Billion Param Model, Very big
-#  model_name_10: bespin-global-klue-sroberta-base-continue-learning-by-mnr
+##  model_name_9: Jaume/gemma-2b-embeddings # 2 Billion Param Model, Very big
+#  model_name_10: bespin-global/klue-sroberta-base-continue-learning-by-mnr
+##  model_name_11: team-lucid/deberta-v3-xlarge-korean
+#  model_name_11: setu4993/LaBSE
+#  model_name_12: sorryhyun/sentence-embedding-klue-large
 
-  ensemble_weight: [1]
+  ensemble_weight: [1,1,1,1,1,1,1,1]
 
 aug_list:
     beomi/KcELECTRA-base: [swap]
@@ -35,12 +38,15 @@ aug_list:
     kakaobank/kf-deberta-base: [swap, insert]
     intfloat/multilingual-e5-large-instruct: [delete, substitute]
     Jaume/gemma-2b-embeddings: [delete, insert]
-    bespin-global-klue-sroberta-base-continue-learning-by-mnr: [substitute, insert]
+    bespin-global/klue-sroberta-base-continue-learning-by-mnr: [swap]
+    team-lucid/deberta-v3-xlarge-korean : [swap]
+    setu4993/LaBSE : [swap]
+    sorryhyun/sentence-embedding-klue-large : []
 
 hyperparameters:
   seed: 0
   num_labels: 1
-  num_workers: 4
+  num_workers: 8
   batch_size: 16
   max_length: 128
   max_epoch: 1

@@ -1,4 +1,6 @@
 from koeda import EDA
+from torch.utils.data import TensorDataset
+import torch
 import pandas as pd
 import re
 
@@ -49,3 +51,34 @@ def koeda(df):
 #     df = line_swap('../data/train.csv')
 #
 #     print(df)
+def concat_train_val(train_path, val_path):
+    df1 = pd.read_csv(train_path)
+    df2 = pd.read_csv(val_path)
+
+    return pd.concat([df1, df2], ignore_index=True)
+
+
+def k_fold_split(train_val_concat, kf, tokenizer):
+
+    x = train_val_concat[['sentence_1', 'sentence_2']]
+    y = train_val_concat['label']
+
+    train_dataset, val_dataset = None, None
+
+    for train_index, val_index in kf.split(x):
+        x_train, x_val = x.iloc[train_index], x.iloc[val_index]
+        y_train, y_val = y.iloc[train_index], y.iloc[val_index]
+
+        train_token = tokenizer_pair(tokenizer, x_train['sentence_1'], x_train['sentence_2'])
+        val_token = tokenizer_pair(tokenizer, x_val['sentence_1'], x_val['sentence_2'])
+
+        y_train_tensor = torch.tensor(y_train.values, dtype=torch.float32)
+        y_val_tensor = torch.tensor(y_val.values, dtype=torch.float32)
+
+        train_dataset = TensorDataset(train_token['input_ids'], train_token['attention_mask'], y_train_tensor)
+        val_dataset = TensorDataset(val_token['input_ids'], val_token['attention_mask'], y_val_tensor)
+
+    return train_dataset, val_dataset
+
+def tokenizer_pair(tokenizer, s1, s2):
+    return tokenizer(s1.tolist(), s2.tolist(), return_tensors='pt', padding='max_length', truncation=True, max_length=128)
