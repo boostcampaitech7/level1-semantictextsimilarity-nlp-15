@@ -9,4 +9,5 @@ src/checkpoint/*
 src/csv_ensemble/*
 src/model/*
 src/output/*.csv
+src/csv_ensemble/*
 data/*.csv
