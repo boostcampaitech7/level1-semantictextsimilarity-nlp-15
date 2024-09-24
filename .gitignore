@@ -8,4 +8,5 @@ src/lightning_logs/*
 src/checkpoint/*
 src/model/*
 src/output/*.csv
+src/csv_ensemble/*
 data/*.csv
