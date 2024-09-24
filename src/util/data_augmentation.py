@@ -23,18 +23,6 @@ def koeda(df, add=False):
 
     res = eda(sentence_1)
 
-    # translate each sequence using list due to koeda does not support type pandas series
-    # for i, each_sentence in enumerate(sentence_1):
-    #     eda_sentence = eda(each_sentence)
-    #
-    #     # remove special characters by using regex
-    #     each_sentence_remove = re.sub('[^a-zA-Z가-힣]', ' ', str(each_sentence))
-    #     eda_sentence_remove = re.sub('[^a-zA-Z가-힣]', ' ', str(eda_sentence))
-    #
-    #     if each_sentence_remove != eda_sentence_remove:
-    #         copy_df.loc[i, 'sentence_1'] = eda_sentence
-    #         diff_list.append([each_sentence, eda_sentence])
-
     copy_df['sentence_1'] = res
 
     df = pd.concat([df, copy_df], ignore_index=True)
