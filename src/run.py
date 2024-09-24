@@ -114,12 +114,12 @@ if __name__ == '__main__':
                     train(args)
                     inference(args)
 
-            elif flag:
-                for file in existence:
-                    os.remove(file)
-
-                for file in existence_checkpoint:
-                    os.remove(file)
+            if flag:
+                # for file in existence:
+                #     os.remove(file)
+                #
+                # for file in existence_checkpoint:
+                #     os.remove(file)
 
                 train(args)
                 inference(args)

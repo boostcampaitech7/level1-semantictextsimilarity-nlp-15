@@ -20,7 +20,7 @@ class Tokenizer(Dataset):
 
 
 class Dataset(torch.utils.data.Dataset):
-    def __init__(self, tokenizer, aug_list, path, predict=False):
+    def __init__(self, tokenizer, aug_list, path, train=False, predict=False):
         self.data = None
         
         self.data = pd.read_csv(path)
@@ -28,7 +28,8 @@ class Dataset(torch.utils.data.Dataset):
         self.tokenizer = tokenizer
         self.predict = predict
 
-        self.aug_for_dataset_class()
+        if train:
+            self.aug_for_dataset_class()
 
     def __len__(self):
         return len(self.data)
@@ -113,7 +114,7 @@ class Dataloader(pl.LightningDataModule):
             self.predict_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.predict_path, predict=True)
 
         else:
-            self.train_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.train_path)
+            self.train_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.train_path, train=True)
             self.val_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.val_path)
             self.dev_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.dev_path)
             self.predict_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.predict_path, predict=True)
