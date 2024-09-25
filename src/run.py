@@ -7,6 +7,7 @@ import yaml
 import random
 import warnings
 import transformers
+import pandas as pd
 
 from ensemble import ensemble  # ensemble.py에서 ensemble 함수를 가져옵니다.
 from train import train
@@ -42,7 +43,6 @@ def set_parser_and_model():
     parser.add_argument('--aug_list', default=configs['aug_list'])
 
     model_list = [i for i in configs['model'].values() if isinstance(i, str)]
-
     args = parser.parse_args(args=[])
 
     return args, model_list
@@ -60,6 +60,23 @@ def check_model_existence(args):
 
     return matching_files, matching_files2
 
+def print_dataset(args):
+    train_dataset = pd.read_csv(args.train_path)
+    val_dataset = pd.read_csv(args.val_path)
+    dev_dataset = pd.read_csv(args.dev_path)
+    predict_dataset = pd.read_csv(args.predict_path)
+
+    # Print dataset's features
+    print("Train Dataset")
+    print(train_dataset.info())
+    print("\nVal Dataset")
+    print(val_dataset.info())
+    print("\nDev Dataset")
+    print(dev_dataset.info())
+    print("\nPredict Dataset")
+    print(predict_dataset.info())
+
+
 if __name__ == '__main__':
     args, model_list = set_parser_and_model()
     flag = None
@@ -74,6 +91,8 @@ if __name__ == '__main__':
     torch.cuda.manual_seed(args.seed)
     torch.cuda.manual_seed_all(args.seed)
     random.seed(args.seed)
+
+    print_dataset(args)
 
     for model in model_list:
         print("Train Start With Model Name : ", model)

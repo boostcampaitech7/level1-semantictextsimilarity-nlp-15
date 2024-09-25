@@ -1,5 +1,6 @@
 from koeda import EDA
 from torch.utils.data import TensorDataset
+from sklearn.utils import shuffle
 import torch
 import pandas as pd
 import re
@@ -33,21 +34,38 @@ def koeda(df, add=False):
 
     return df if not add else diff_list
 
-# import pandas as pd
-#
-# def line_swap(path):
-#     df = pd.read_csv(path)
-#     swap_df = pd.read_csv(path)
-#
-#     swap_df['sentence_1'], swap_df['sentence_2'] = swap_df['sentence_2'], swap_df['sentence_1']
-#
-#     df = pd.concat([df, swap_df])
-#     return df
-#
-# if __name__ == '__main__':
-#     df = line_swap('../data/train.csv')
-#
-#     print(df)
+def copy_sentence(df, index_min=250, index_max=750) -> pd.DataFrame:
+    df_copied = df[df["label"] == 0][index_min:index_max].copy()
+    df_copied["sentence_1"] = df_copied["sentence_2"]  # sentence 2를 sentence 1으로 복사
+    df_copied["label"] = 5.0  # 라벨 5로 설정
+
+    df_copied = df_copied.drop_duplicates(subset=['sentence_1'], keep='first')
+
+    return df_copied
+
+def under_sampling(df) -> pd.DataFrame:
+    """
+    label 값이 0인 데이터를 under sampling하는 함수
+        Args:
+            data_path (str): 증강하고자 하는 데이터의 경로
+        Returns:
+            df_new (DataFrame): under sampling된 데이터
+    """
+
+    df_0 = df[df["label"] == 0][1000:2000].copy()  # 라벨 0의 일부 데이터 선택
+    df_new = df[df["label"] != 0].copy()  # 라벨 0이 아닌 데이터 선택
+    df_new = pd.concat([df_new, df_0])  # 라벨 0 데이터와 결합
+    return df_new
+
+
+def train_val_split(train_df, dev_df, ratio=0.8):
+    # Concat two df and split random in 8:2 ratio
+    train_val_concat = concat_train_val(train_df, dev_df)
+    train_val_concat = shuffle(train_val_concat).reset_index(drop=True)
+
+    split_index = int(len(train_val_concat) * ratio)
+    return train_val_concat[:split_index], train_val_concat[split_index:]
+
 def concat_train_val(train_path, val_path):
     df1 = pd.read_csv(train_path)
     df2 = pd.read_csv(val_path)
