@@ -12,7 +12,7 @@ path:
 # List of model names to use.
 model:
 #  model_name_11: team-lucid/deberta-v3-xlarge-korean
-#  model_name_2: snunlp/KR-ELECTRA-discriminator
+  model_name_2: snunlp/KR-ELECTRA-discriminator
 #  model_name_5: FacebookAI/xlm-roberta-large
   model_name_13: deliciouscat/kf-deberta-base-cross-sts
 #  model_name_14: sorryhyun-sentence-embedding-klue-large
@@ -33,20 +33,23 @@ model:
   ensemble_weight: [1,1,1,1,1,1,1,1]
 
 aug_list:
+    snunlp/KR-ELECTRA-discriminator: [train_val_split]
+    FacebookAI/xlm-roberta-large: []
+    team-lucid/deberta-v3-xlarge-korean : []
+    deliciouscat/kf-deberta-base-cross-sts : [swap under_sampling]
+
     beomi/KcELECTRA-base: [swap]
-    snunlp/KR-ELECTRA-discriminator: [swap, koeda]
     jhgan/ko-sroberta-multitask: [swap]
     sentence-transformers/all-MiniLM-L6-v2: [swap]
-    FacebookAI/xlm-roberta-large: [swap, delete]
     monologg/koelectra-base-v3-discriminator: [swap, substitute]
     kakaobank/kf-deberta-base: [swap, insert]
     intfloat/multilingual-e5-large-instruct: [delete, substitute]
     Jaume/gemma-2b-embeddings: [delete, insert]
     bespin-global/klue-sroberta-base-continue-learning-by-mnr: [swap]
-    team-lucid/deberta-v3-xlarge-korean : [swap]
+
     setu4993/LaBSE : [swap]
     sorryhyun/sentence-embedding-klue-large : []
-    deliciouscat/kf-deberta-base-cross-sts : [swap]
+
 
 hyperparameters:
   seed: 0
@@ -54,5 +57,5 @@ hyperparameters:
   num_workers: 8
   batch_size: 16
   max_length: 128
-  max_epoch: 10
+  max_epoch: 20
   learning_rate: 1e-5
