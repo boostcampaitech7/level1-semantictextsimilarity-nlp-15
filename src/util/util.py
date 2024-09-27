@@ -115,6 +115,7 @@ class Dataloader(pl.LightningDataModule):
             self.train_dataset, self.val_dataset = data_augmentation.k_fold_split(train_val_concat, kf, self.tokenizer.tokenizer)
             self.dev_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.dev_path)
             self.predict_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.predict_path, predict=True)
+            return
 
         elif 'train_val_split' in aug_list:
             train_dataset, val_dataset = data_augmentation.train_val_split(self.train_path, self.val_path)
@@ -123,12 +124,14 @@ class Dataloader(pl.LightningDataModule):
             self.val_dataset = Dataset(self.tokenizer.tokenizer, aug_list, val_dataset)
             self.dev_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.dev_path)
             self.predict_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.predict_path, predict=True)
+            return
 
         else:
             self.train_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.train_path, train=True)
             self.val_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.val_path)
             self.dev_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.dev_path)
             self.predict_dataset = Dataset(self.tokenizer.tokenizer, aug_list, self.predict_path, predict=True)
+            return
 
     def train_dataloader(self):
         return torch.utils.data.DataLoader(self.train_dataset, persistent_workers=True, batch_size=self.batch_size, shuffle=True, num_workers=self.num_worker, collate_fn=self.collate)

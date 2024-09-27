@@ -16,6 +16,7 @@ model:
 #  model_name_5: FacebookAI/xlm-roberta-large
   model_name_13: deliciouscat/kf-deberta-base-cross-sts
 #  model_name_14: sorryhyun-sentence-embedding-klue-large
+#  model_name_15 : upskyy-kf-deberta-multitask
 
 #  model_name_1: beomi/KcELECTRA-base
 
@@ -33,10 +34,10 @@ model:
   ensemble_weight: [1,1,1,1,1,1,1,1]
 
 aug_list:
-    snunlp/KR-ELECTRA-discriminator: [train_val_split]
+    snunlp/KR-ELECTRA-discriminator: [under_sampling]
     FacebookAI/xlm-roberta-large: []
     team-lucid/deberta-v3-xlarge-korean : []
-    deliciouscat/kf-deberta-base-cross-sts : [swap under_sampling]
+    deliciouscat/kf-deberta-base-cross-sts : [under_sampling]
 
     beomi/KcELECTRA-base: [swap]
     jhgan/ko-sroberta-multitask: [swap]
