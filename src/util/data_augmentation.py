@@ -1,4 +1,6 @@
+import requests
 from koeda import EDA
+from sklearn.model_selection import train_test_split
 from torch.utils.data import TensorDataset
 from sklearn.utils import shuffle
 import torch
@@ -57,14 +59,51 @@ def under_sampling(df) -> pd.DataFrame:
     df_new = pd.concat([df_new, df_0])  # 라벨 0 데이터와 결합
     return df_new
 
+def remove_stopwords(df):
+    # Load stopwords list
+    def sub_func(text):
+        url = "https://raw.githubusercontent.com/stopwords-iso/stopwords-ko/master/stopwords-ko.txt"
+        response = requests.get(url)
+        stop_words = set(response.text.splitlines())
+        # print(stop_words)
+
+        return ' '.join([word for word in text.split() if word not in stop_words])
+
+    df['sentence_1'] = df['sentence_1'].apply(sub_func)
+    df['sentence_2'] = df['sentence_2'].apply(sub_func)
+
+    return df
+
+def clean_text(df):
+    # Load stopwords list
+    def sub_func(sentence):
+        sentence = re.sub(r'<[^>]+>', '', sentence)
+        sentence = re.sub(r'[^가-힣a-zA-Z\s]', '', sentence)
+        return sentence
+
+    df['sentence_1'] = df['sentence_1'].apply(sub_func)
+    df['sentence_2'] = df['sentence_2'].apply(sub_func)
+
+    return df
+
+def normalize_numbers(df):
+    # Load stopwords list
+    def sub_func(sentence):
+        sentence = re.sub(r'\d+', 'NUM', sentence)
+        return sentence
+
+    df['sentence_1'] = df['sentence_1'].apply(sub_func)
+    df['sentence_2'] = df['sentence_2'].apply(sub_func)
+
+    return df
+
 
 def train_val_split(train_df, dev_df, ratio=0.8):
     # Concat two df and split random in 8:2 ratio
     train_val_concat = concat_train_val(train_df, dev_df)
-    train_val_concat = shuffle(train_val_concat).reset_index(drop=True)
-
-    split_index = int(len(train_val_concat) * ratio)
-    return train_val_concat[:split_index], train_val_concat[split_index:]
+    train_df, dev_df = train_test_split(train_val_concat, test_size=1-ratio, stratify=train_val_concat['binary-label'],
+                                        random_state=0)
+    return train_df, dev_df
 
 def concat_train_val(train_path, val_path):
     df1 = pd.read_csv(train_path)
