@@ -1,7 +1,7 @@
 *.pt
 *.pyc
 
-ETC/openvpn*
+ETC/*
 BaseCode/code/lightning_logs
 BaseCode/
 src/model/*
