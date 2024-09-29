@@ -17,13 +17,15 @@ def train(args):
     aug_list = args.aug_list[args.model_name]
     epoch = args.max_epoch
 
-    # 모델 파일 저장 전 디렉토리 확인 및 생성
+    # Create model directory
     os.makedirs(os.path.join("model"), exist_ok=True)
 
+    # Setup dataloader
     dataloader = util.Dataloader(
         args.model_name, aug_list, args.batch_size, args.max_length, args.num_workers, args.train_path, args.val_path, args.dev_path, args.predict_path
     )
 
+    # Setup callbacks
     early_stopping = pl.callbacks.EarlyStopping(
         monitor="val_pearson",
         min_delta=0.001,
@@ -40,7 +42,10 @@ def train(args):
         mode="max"
     )
 
+    # Setup model
     model_instance = model.Model(args.model_name, args.num_labels, args.learning_rate)
+
+    # Setup trainer and fit
     trainer = pl.Trainer(
         accelerator="gpu",
         devices=1,
@@ -56,6 +61,7 @@ def train(args):
     val_pearson = trainer.callback_metrics["val_pearson"].item()
     current_epoch = trainer.current_epoch  # 현재 에폭 가져오기
 
+    # Save the best model
     torch.save(model_instance, os.path.join('model', f'{model_name}_{current_epoch}_{val_pearson:.4f}.ckpt'))
 
 if __name__ == "__main__":

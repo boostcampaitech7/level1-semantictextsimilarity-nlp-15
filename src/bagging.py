@@ -7,14 +7,15 @@ from inference import inference
 from ensemble import bagging_ensemble
 
 def bagging(args, num_splits):
-    with open(os.path.join('src', 'config', 'config.yaml')) as f:
+    # Get Model List from config.yaml
+    with open(os.path.join('config.yaml')) as f:
         configs = yaml.safe_load(f)
 
-    # 모델 이름만 가져오기
     model_list = [configs['model'][key] for key in configs['model'] if 'model_name' in key]
     model_name = model_list[-1].split('/')[-1]
     name = args.train_path.split('/')[-1].split('.')[0]
 
+    # Train and Inference
     for i in range(num_splits):
         args.train_path = f'./data/{name}.csv_split_part_{i+1}.csv'
         train(args)

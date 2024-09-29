@@ -8,6 +8,7 @@ src/csv_ensemble/*
 src/lightning_logs/*
 src/model/*.pt
 src/model/*.ckpt
+!src/output/sample_submission.csv
 src/output/*.csv
 data/*.csv
 *.ckpt

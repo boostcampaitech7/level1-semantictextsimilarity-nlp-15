@@ -9,7 +9,7 @@ import warnings
 import transformers
 import pandas as pd
 
-from ensemble import ensemble  # ensemble.py에서 ensemble 함수를 가져옵니다.
+from ensemble import ensemble
 from train import train
 from inference import inference
 
@@ -48,7 +48,7 @@ def set_parser_and_model():
     return args, model_list
 
 def check_model_existence(args):
-    epoch = args.max_epoch
+    #epoch = args.max_epoch
     model_name = args.model_name.replace("/", "-")
 
     # find model file by wildcard pattern

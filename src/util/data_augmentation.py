@@ -42,8 +42,6 @@ def koeda(df, add=False):
 
     df = pd.concat([df, copy_df], ignore_index=True)
     df = df.drop_duplicates(subset=['sentence_1'], keep='first')
-
-    # Drop any row that has empty columns
     df = df.dropna()
 
     return df if not add else diff_list
@@ -54,8 +52,8 @@ def copy_sentence(df, index_min=250, index_max=750) -> pd.DataFrame:
     """
         
     df_copied = df[df["label"] == 0][index_min:index_max].copy()
-    df_copied["sentence_1"] = df_copied["sentence_2"]  # sentence 2를 sentence 1으로 복사
-    df_copied["label"] = 5.0  # 라벨 5로 설정
+    df_copied["sentence_1"] = df_copied["sentence_2"]
+    df_copied["label"] = 5.0
 
     df_copied = df_copied.drop_duplicates(subset=['sentence_1'], keep='first')
 
@@ -66,9 +64,9 @@ def under_sampling(df) -> pd.DataFrame:
     label 값이 0인 데이터를 under sampling하는 함수
     """
 
-    df_0 = df[df["label"] == 0][1000:2000].copy()  # 라벨 0의 일부 데이터 선택
-    df_new = df[df["label"] != 0].copy()  # 라벨 0이 아닌 데이터 선택
-    df_new = pd.concat([df_new, df_0])  # 라벨 0 데이터와 결합
+    df_0 = df[df["label"] == 0][1000:2000].copy()
+    df_new = df[df["label"] != 0].copy()
+    df_new = pd.concat([df_new, df_0])
     return df_new
 
 def remove_stopwords(df):
@@ -79,7 +77,6 @@ def remove_stopwords(df):
         url = "https://raw.githubusercontent.com/stopwords-iso/stopwords-ko/master/stopwords-ko.txt"
         response = requests.get(url)
         stop_words = set(response.text.splitlines())
-        # print(stop_words)
 
         return ' '.join([word for word in text.split() if word not in stop_words])
 
@@ -118,9 +115,8 @@ def normalize_numbers(df):
 
 def train_val_split(train_df, dev_df, ratio=0.8):
     """
-    Train, Validation 데이터를 나누는 함수
+    Train, Validation 데이터를 ratio 비율로 나누는 함수
     """
-    # Concat two df and split random in 8:2 ratio
     train_val_concat = concat_train_val(train_df, dev_df)
     train_df, dev_df = train_test_split(train_val_concat, test_size=1-ratio, stratify=train_val_concat['binary-label'],
                                         random_state=0)
