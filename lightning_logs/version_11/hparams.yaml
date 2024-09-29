@@ -1,3 +1,0 @@
-lr: 1.0e-05
-model_name: jhgan/ko-sroberta-multitask
-num_labels: 1
