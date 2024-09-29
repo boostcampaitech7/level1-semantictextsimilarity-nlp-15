@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-import argparse
-import os
->>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 import os
 import argparse
 import random
