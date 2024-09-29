@@ -1,0 +1,3 @@
+lr: 1.0e-05
+model_name: snunlp/KR-ELECTRA-discriminator
+num_labels: 1

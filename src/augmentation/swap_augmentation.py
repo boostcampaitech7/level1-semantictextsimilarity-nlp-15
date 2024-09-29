@@ -1,4 +1,15 @@
 import pandas as pd
+<<<<<<< HEAD
+=======
+import sys
+import os
+import numpy as np
+import random
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
+def swap_sentences(df, concatFlag=False):
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 
 
 def swap_sentences(df):
@@ -19,11 +30,48 @@ def swap_sentences(df):
     swapped_df['sentence_1'], swapped_df['sentence_2'] = df['sentence_2'], df['sentence_1']
 
     # 원본 데이터와 합치기
+<<<<<<< HEAD
     result_df = pd.concat([df, swapped_df], ignore_index=True)
 
 
     return result_df
 
+=======
+    if concatFlag:
+        result_df = pd.concat([df, swapped_df], ignore_index=True)
+    else:
+        result_df = swapped_df
+
+    return result_df
+
+def separate_data(df, num_splits=3) -> list:
+    """
+    증강된 데이터를 bagging 기법에 사용하기 위해서 지정된 수 만큼 분리합니다.
+    
+    Args:
+    df (pd.DataFrame): 원본 데이터프레임
+    num_splits (int) : 분리되고자 하는 수
+    
+    Returns:
+    list : 분리된 원본 데이터프레임
+    """
+
+    indices = list(df.index)
+    random.shuffle(indices)
+
+    num_rows = len(indices)
+    split_size = num_rows // 5
+    remainder = num_rows % 5
+
+    splits = []
+    start = 0
+    for i in range(5):
+        end = start + split_size + (1 if i < remainder else 0)  
+        splits.append(df.iloc[indices[start:end]])
+        start = end
+
+    return splits
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 
 if __name__ == "__main__":
     # CSV 파일에서 데이터 로드
