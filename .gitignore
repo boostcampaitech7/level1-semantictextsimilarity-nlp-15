@@ -1,14 +1,15 @@
 *.pt
 *.pyc
+*.ckpt
+*.pth
 
-BaseCode/code/lightning_logs/*
-ETC/*
-src/checkpoint/*
-src/csv_ensemble/*
-src/lightning_logs/*
+BaseCode/code/lightning_logs/
+ETC/
+src/checkpoint/
+src/csv_ensemble/
+src/data/
+src/lightning_logs/
 src/model/*.pt
 src/model/*.ckpt
 !src/output/sample_submission.csv
 src/output/*.csv
-data/*.csv
-*.ckpt
