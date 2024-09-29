@@ -1,6 +1,5 @@
 *.pt
 *.pyc
-<<<<<<< HEAD
 
 BaseCode/code/lightning_logs/*
 ETC/*
@@ -10,17 +9,4 @@ src/model/*.pt
 src/model/*.ckpt
 src/output/*.csv
 data/*.csv
-=======
 *.ckpt
-
-ETC/openvpn*
-BaseCode/code/lightning_logs
-BaseCode/
-src/lightning_logs/*
-src/checkpoint/*
-src/csv_ensemble/*
-src/model/*
-src/output/*.csv
-src/csv_ensemble/*
-data/*.csv
->>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
