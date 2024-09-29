@@ -10,10 +10,17 @@ import torch
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+<<<<<<< HEAD
 from util import util
 from model import model  # 모델 클래스를 가져옵니다.
 
 def inference(args):
+=======
+from src.util import util
+from src.model import model  # 모델 클래스를 가져옵니다.
+
+def inference(args, idx=-1):
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
     model_name = args.model_name.replace("/", "-")
 
     # 데이터 로더 설정
@@ -38,9 +45,23 @@ def inference(args):
     model_instance = model.Model(args.model_name, args.num_labels, args.learning_rate)
     model_instance.load_state_dict(checkpoint['state_dict'])  # 상태 딕셔너리 로드
 
+<<<<<<< HEAD
     # val_pearson 값 추출 / current_epoch 값 추출
     val_pearson = float(latest_checkpoint.split('_')[-1].split('=')[-1].replace('.ckpt', ''))
     current_epoch = int(latest_checkpoint.split('_')[1].split('=')[1])
+=======
+<<<<<<< HEAD
+    # val_pearson 값 추출
+    val_pearson = float(latest_checkpoint.split('_')[-1].split('=')[-1].replace('.ckpt', ''))
+
+    # current_epoch 값 추출
+    current_epoch = int(latest_checkpoint.split('_')[1].split('=')[1])  
+=======
+    # val_pearson 값 추출 / current_epoch 값 추출
+    val_pearson = float(latest_checkpoint.split('_')[-1].split('=')[-1].replace('.ckpt', ''))
+    current_epoch = int(latest_checkpoint.split('_')[1].split('=')[1])
+>>>>>>> main
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 
     trainer = pl.Trainer(
         accelerator="gpu",
@@ -54,11 +75,24 @@ def inference(args):
     predictions = list(round(float(i), 1) for i in torch.cat(predictions))
 
     # 출력 디렉토리 확인 및 생성
+<<<<<<< HEAD
     os.makedirs(args.output_path, exist_ok=True)
 
     output = pd.read_csv(os.path.join(args.output_path, "sample_submission.csv"))
     output['target'] = predictions
     output.to_csv(os.path.join(args.output_path, f"{model_name}_{current_epoch}_{val_pearson:.4f}.csv"), index=False)
+=======
+    output_dir = args.output_path
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+
+    output = pd.read_csv(os.path.join(args.output_path, "sample_submission.csv"))
+    output['target'] = predictions
+    if idx == -1:
+        output.to_csv(os.path.join(output_dir, f"{model_name}_{current_epoch}_{val_pearson:.4f}.csv"), index=False)
+    else:
+        output.to_csv(os.path.join(output_dir, f"{model_name}{idx}_{current_epoch}_{val_pearson:.4f}.csv"), index=False)
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 
 if __name__ == "__main__":
     # seed 고정

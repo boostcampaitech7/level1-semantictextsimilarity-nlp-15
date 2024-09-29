@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import argparse
+import os
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 import os
 import argparse
 import glob
@@ -7,14 +12,24 @@ import yaml
 import random
 import warnings
 import transformers
+<<<<<<< HEAD
 import pandas as pd
+=======
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 
 from ensemble import ensemble  # ensemble.py에서 ensemble 함수를 가져옵니다.
 from train import train
 from inference import inference
+<<<<<<< HEAD
 
 def set_parser_and_model():
     with open(os.path.join('config.yaml')) as f:
+=======
+from bagging import bagging
+
+def set_parser_and_model():
+    with open(os.path.join('src', 'config', 'config.yaml')) as f:
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
         configs = yaml.safe_load(f)
 
     parser = argparse.ArgumentParser()
@@ -43,6 +58,10 @@ def set_parser_and_model():
     parser.add_argument('--aug_list', default=configs['aug_list'])
 
     model_list = [i for i in configs['model'].values() if isinstance(i, str)]
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
     args = parser.parse_args(args=[])
 
     return args, model_list
@@ -60,6 +79,7 @@ def check_model_existence(args):
 
     return matching_files, matching_files2
 
+<<<<<<< HEAD
 def print_dataset(args):
     train_dataset = pd.read_csv(args.train_path)
     val_dataset = pd.read_csv(args.val_path)
@@ -77,6 +97,8 @@ def print_dataset(args):
     print(predict_dataset.info())
 
 
+=======
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 if __name__ == '__main__':
     args, model_list = set_parser_and_model()
     flag = None
@@ -92,8 +114,11 @@ if __name__ == '__main__':
     torch.cuda.manual_seed_all(args.seed)
     random.seed(args.seed)
 
+<<<<<<< HEAD
     print_dataset(args)
 
+=======
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
     for model in model_list:
         print("Train Start With Model Name : ", model)
         args.model_name = model
@@ -149,4 +174,8 @@ if __name__ == '__main__':
 
     # Ensemble
     print("Starting ensemble process...")
+<<<<<<< HEAD
     ensemble(args)  # Ensure this calls the correct function in ensemble.py
+=======
+    ensemble(args)  # Ensure this calls the correct function in ensemble.py
+>>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
