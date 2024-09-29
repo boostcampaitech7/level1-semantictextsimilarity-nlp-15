@@ -1,12 +1,10 @@
 import argparse
 import os
-import torch
 import yaml
 
 from train import train
 from inference import inference
 from ensemble import bagging_ensemble
-
 
 def bagging(args, num_splits):
     with open(os.path.join('src', 'config', 'config.yaml')) as f:
@@ -16,14 +14,15 @@ def bagging(args, num_splits):
     model_list = [configs['model'][key] for key in configs['model'] if 'model_name' in key]
     model_name = model_list[-1].split('/')[-1]
     name = args.train_path.split('/')[-1].split('.')[0]
+
     for i in range(num_splits):
         args.train_path = f'./data/{name}.csv_split_part_{i+1}.csv'
         train(args)
         inference(args, i)
         checkpoint_files = [f for f in os.listdir(args.checkpoint_path) if f.endswith('.ckpt') and model_name in f]
+
         if not checkpoint_files:
             raise FileNotFoundError("No checkpoint files found.")
-            continue
 
         latest_checkpoint = max(checkpoint_files, key=lambda x: float(x.split('_')[-1].split('=')[-1].replace('.ckpt', '')))
         os.remove(os.path.join(args.checkpoint_path, latest_checkpoint))

@@ -1,23 +1,35 @@
+import pandas as pd
+import torch
 import requests
+import re
+
 from koeda import EDA
 from sklearn.model_selection import train_test_split
 from torch.utils.data import TensorDataset
-from sklearn.utils import shuffle
-import torch
-import pandas as pd
-import re
 
 def swap_sentences(df):
+    """
+    두 문장의 순서를 바꾸어 데이터를 증강하는 함수
+    """
+        
     swapped_df = df.copy()
     swapped_df['sentence_1'], swapped_df['sentence_2'] = df['sentence_2'], df['sentence_1']
     return pd.concat([df, swapped_df], ignore_index=True)
 
 def remove_special_characters(df):
+    """
+    특수문자를 제거하는 함수
+    """
+        
     df['sentence_1'] = df['sentence_1'].str.replace('[^a-zA-Z0-9가-힣]', ' ', regex=True)
     df['sentence_2'] = df['sentence_2'].str.replace('[^a-zA-Z0-9가-힣]', ' ', regex=True)
     return df
 
 def koeda(df, add=False):
+    """
+    EDA를 통해 데이터를 증강하는 함수
+    """
+
     eda = EDA(morpheme_analyzer="Okt", alpha_sr=0.1, alpha_ri=0.1, alpha_rs=0.1, prob_rd=0.1)
 
     copy_df = df.copy()
@@ -37,6 +49,10 @@ def koeda(df, add=False):
     return df if not add else diff_list
 
 def copy_sentence(df, index_min=250, index_max=750) -> pd.DataFrame:
+    """
+    label 값이 0인 데이터를 복사하여 label 5로 설정하는 함수
+    """
+        
     df_copied = df[df["label"] == 0][index_min:index_max].copy()
     df_copied["sentence_1"] = df_copied["sentence_2"]  # sentence 2를 sentence 1으로 복사
     df_copied["label"] = 5.0  # 라벨 5로 설정
@@ -48,10 +64,6 @@ def copy_sentence(df, index_min=250, index_max=750) -> pd.DataFrame:
 def under_sampling(df) -> pd.DataFrame:
     """
     label 값이 0인 데이터를 under sampling하는 함수
-        Args:
-            data_path (str): 증강하고자 하는 데이터의 경로
-        Returns:
-            df_new (DataFrame): under sampling된 데이터
     """
 
     df_0 = df[df["label"] == 0][1000:2000].copy()  # 라벨 0의 일부 데이터 선택
@@ -60,7 +72,9 @@ def under_sampling(df) -> pd.DataFrame:
     return df_new
 
 def remove_stopwords(df):
-    # Load stopwords list
+    """
+    불용어를 제거하는 함수
+    """
     def sub_func(text):
         url = "https://raw.githubusercontent.com/stopwords-iso/stopwords-ko/master/stopwords-ko.txt"
         response = requests.get(url)
@@ -75,7 +89,9 @@ def remove_stopwords(df):
     return df
 
 def clean_text(df):
-    # Load stopwords list
+    """
+    텍스트 데이터를 정제하는 함수
+    """
     def sub_func(sentence):
         sentence = re.sub(r'<[^>]+>', '', sentence)
         sentence = re.sub(r'[^가-힣a-zA-Z\s]', '', sentence)
@@ -87,7 +103,9 @@ def clean_text(df):
     return df
 
 def normalize_numbers(df):
-    # Load stopwords list
+    """
+    숫자를 NUM으로 대체하는 함수
+    """
     def sub_func(sentence):
         sentence = re.sub(r'\d+', 'NUM', sentence)
         return sentence
@@ -99,6 +117,9 @@ def normalize_numbers(df):
 
 
 def train_val_split(train_df, dev_df, ratio=0.8):
+    """
+    Train, Validation 데이터를 나누는 함수
+    """
     # Concat two df and split random in 8:2 ratio
     train_val_concat = concat_train_val(train_df, dev_df)
     train_df, dev_df = train_test_split(train_val_concat, test_size=1-ratio, stratify=train_val_concat['binary-label'],
@@ -107,6 +128,9 @@ def train_val_split(train_df, dev_df, ratio=0.8):
 
 
 def concat_train_val(train_path, val_path):
+    """
+    Train, Validation 데이터를 합치는 함수
+    """
     df1 = pd.read_csv(train_path)
     df2 = pd.read_csv(val_path)
 
@@ -114,7 +138,9 @@ def concat_train_val(train_path, val_path):
 
 
 def k_fold_split(train_val_concat, kf, tokenizer):
-
+    """
+    K-Fold로 데이터를 나누는 함수
+    """
     x = train_val_concat[['sentence_1', 'sentence_2']]
     y = train_val_concat['label']
 

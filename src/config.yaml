@@ -12,18 +12,11 @@ path:
 # List of model names to use.
 model:
 #  model_name_11: team-lucid/deberta-v3-xlarge-korean
-<<<<<<< HEAD
   model_name_2: snunlp/KR-ELECTRA-discriminator
 #  model_name_5: FacebookAI/xlm-roberta-large
   model_name_13: deliciouscat/kf-deberta-base-cross-sts
 #  model_name_14: sorryhyun-sentence-embedding-klue-large
 #  model_name_15 : upskyy-kf-deberta-multitask
-=======
-#  model_name_2: snunlp/KR-ELECTRA-discriminator
-#  model_name_5: FacebookAI/xlm-roberta-large
-  model_name_13: deliciouscat/kf-deberta-base-cross-sts
-#  model_name_14: sorryhyun-sentence-embedding-klue-large
->>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 
 #  model_name_1: beomi/KcELECTRA-base
 
@@ -41,38 +34,20 @@ model:
   ensemble_weight: [1,1,1,1,1,1,1,1]
 
 aug_list:
-<<<<<<< HEAD
-    snunlp/KR-ELECTRA-discriminator: [under_sampling]
-    FacebookAI/xlm-roberta-large: []
-    team-lucid/deberta-v3-xlarge-korean : []
-    deliciouscat/kf-deberta-base-cross-sts : [under_sampling]
-
-    beomi/KcELECTRA-base: [swap]
-    jhgan/ko-sroberta-multitask: [swap]
-    sentence-transformers/all-MiniLM-L6-v2: [swap]
-=======
     beomi/KcELECTRA-base: [swap]
     snunlp/KR-ELECTRA-discriminator: [swap, koeda]
     jhgan/ko-sroberta-multitask: [swap]
     sentence-transformers/all-MiniLM-L6-v2: [swap]
     FacebookAI/xlm-roberta-large: [swap, delete]
->>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
     monologg/koelectra-base-v3-discriminator: [swap, substitute]
     kakaobank/kf-deberta-base: [swap, insert]
     intfloat/multilingual-e5-large-instruct: [delete, substitute]
     Jaume/gemma-2b-embeddings: [delete, insert]
     bespin-global/klue-sroberta-base-continue-learning-by-mnr: [swap]
-<<<<<<< HEAD
-
-    setu4993/LaBSE : [swap]
-    sorryhyun/sentence-embedding-klue-large : []
-
-=======
     team-lucid/deberta-v3-xlarge-korean : [swap]
     setu4993/LaBSE : [swap]
     sorryhyun/sentence-embedding-klue-large : []
     deliciouscat/kf-deberta-base-cross-sts : [swap]
->>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 
 hyperparameters:
   seed: 0
@@ -80,9 +55,5 @@ hyperparameters:
   num_workers: 8
   batch_size: 16
   max_length: 128
-<<<<<<< HEAD
-  max_epoch: 20
-=======
-  max_epoch: 10
->>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
+  max_epoch: 1
   learning_rate: 1e-5

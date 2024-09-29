@@ -8,8 +8,6 @@ import pandas as pd
 from scipy.stats import pearsonr  # Pearson 계수를 계산하기 위한 모듈 추가
 import yaml
 
-<<<<<<< HEAD
-=======
 def bagging_ensemble(args):
     # Get Model List from config.yaml
     with open(os.path.join('src', 'config', 'config.yaml')) as f:
@@ -60,7 +58,6 @@ def bagging_ensemble(args):
     # 결과를 CSV로 저장
     submission.to_csv(os.path.join(args.output_path, f"{ensemble_name}_bagging.csv"), index=False)
 
->>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
 
 def ensemble(args):
     # Get Model List from config.yaml
@@ -89,10 +86,7 @@ def ensemble(args):
             # 마지막 열을 가져옴
             label = pd.read_csv(matching_files[-1]).iloc[:, -1]  # 가장 최근 파일 선택
             csvs.append(label)
-<<<<<<< HEAD
-
-=======
->>>>>>> 1b57967bc99b9920498a9b37430d3281725fbe8c
+            
         except Exception as e:
             print(f"Error reading file: {e}. Skipping this model.")
             continue

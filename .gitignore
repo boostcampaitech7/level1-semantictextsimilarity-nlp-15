@@ -5,6 +5,7 @@ BaseCode/code/lightning_logs/*
 ETC/*
 src/checkpoint/*
 src/csv_ensemble/*
+src/lightning_logs/*
 src/model/*.pt
 src/model/*.ckpt
 src/output/*.csv
