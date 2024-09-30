@@ -5,7 +5,6 @@
 </div>
 
 ## ✏️ 대회 소개
-
 | 특징 | 설명 |
 |:---:| --- |
 | 대회 주제 | 네이버 부스트캠프 AI-Tech 7기 NLP트랙의 level 1 도메인 기초 대회 |
@@ -62,7 +61,6 @@
 - 프로젝트는 2024-09-11 ~ 2024-09-27까지 진행되었습니다.
 
 <div align='center'>
-
 ![Project Timeline](https://github.com/user-attachments/assets/fc70c368-0d80-4e96-ae33-4ae5769fe7be)
 
 </div>
