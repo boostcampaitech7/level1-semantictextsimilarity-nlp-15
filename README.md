@@ -77,7 +77,7 @@
 | 전처리 | `동의어 교체`, `단어 순서 변경`, `랜덤 삭제` |
 | 증강 | label 0 - `undersampling`, label 5 - `copied sentence`, `swapping sentence` |
 | 모델 선정 | `upskyy/kf-deberta-multitask`, `team-lucid/deberta-v3-xlarge-korean`, `snunlp/KR-ELECTRA-discriminator`, `kykim/electra-kor-base`, `monologg/ko-electra-base-v3-discriminator`, `jhgan/ko-sroberta-multitask`, `FacebookAI/roberta-large-rtt`, `deliciouscat/kf-deberta-base-cross-sts`, `sorryhyun-sentence-embedding-klue-large` |
-| 앙상블 | `soft voting`, `Nested Ensemble`|
+| 앙상블 | `soft voting`, `Nested Ensemble`, `Bagging`|
 
 ### 📊 Dataset
 - 데이터 증강 과정에서 라벨 분포를 균형있게 맞추고자 라벨별 증강비율을 조정하였습니다.
