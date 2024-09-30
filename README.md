@@ -142,7 +142,7 @@
 
 ### Installation
 1. pip install -r requirements.txt
-2. Put data, dev, test csv files at /src/data directory
+2. Put train, dev, test csv files at /src/data directory
 3. Put sample_submission.csv at /src/output directory
 4. Set models and augmentation methods on config.yaml
 5. Execute run.py
