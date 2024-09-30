@@ -5,9 +5,8 @@
 </div>
 
 ## ✏️ 대회 소개
-
-| 특징     | 설명 |
-|:------:| --- |
+| 특징 | 설명 |
+|:---:| --- |
 | 대회 주제 | 네이버 부스트캠프 AI-Tech 7기 NLP트랙의 level 1 도메인 기초 대회 |
 | 대회 설명 | 두 문장이 주어졌을 때 두 문장에 대한 STS(Semantic Text Simliarity)를 추론하는 대회로 Kaggle과 Dacon과 같이 competition 형태 |
 | 데이터 구성 | 데이터는 slack 대화, 네이버 영화 후기, 국민 청원 문장으로 구성. Train(9324개), Dev(550개), Test(1100개) |
@@ -38,8 +37,8 @@
 ## 👼 역할 분담
 <div align='center'>
 
-|팀원   | 역할 |
-|------| --- |
+|팀원| 역할 |
+|---| --- |
 | 김진재 | EDA, 방법론 제안, 협업 환경 및 베이스라인 관리, 모델 탐색, 증강 기법 및 전처리 실험, 앙상블 코드 작성 및 실험 |
 | 박규태 | EDA, 모델 탐색, 데이터 증강 및 앙상블 기법에 대한 실험, Bagging 기법 코드 작성 및 실험 |
 | 윤선웅 | EDA, 협업 환경 및 베이스라인 관리, 데이터 분포 및 재분할 총괄, 모델 탐색, 데이터 증강 실험, 앙상블 코드 작성 및 실험 |
@@ -62,7 +61,6 @@
 - 프로젝트는 2024-09-11 ~ 2024-09-27까지 진행되었습니다.
 
 <div align='center'>
-
 ![Project Timeline](https://github.com/user-attachments/assets/fc70c368-0d80-4e96-ae33-4ae5769fe7be)
 
 </div>
@@ -71,13 +69,13 @@
 - 프로젝트를 진행하며 단계별로 실험하여 적용한 내용들을 아래와 같습니다.
 
 
-|  프로세스   | 설명 |
-|:-------:| --- |
-| EDA     | 데이터 분포 분석, Baseline 모델 예측과 실제값 차이 분석  |
-| 전처리   | `동의어 교체`, `단어 순서 변경`, `랜덤 삭제` |
-| 증강     | label 0 - `undersampling`, label 5 - `copied sentence`, `swapping sentence` |
+|프로세스| 설명 |
+|:---:| --- |
+| EDA | 데이터 분포 분석, Baseline 모델 예측과 실제값 차이 분석  |
+| 전처리 | `동의어 교체`, `단어 순서 변경`, `랜덤 삭제` |
+| 증강 | label 0 - `undersampling`, label 5 - `copied sentence`, `swapping sentence` |
 | 모델 선정 | `upskyy/kf-deberta-multitask`, `team-lucid/deberta-v3-xlarge-korean`, `snunlp/KR-ELECTRA-discriminator`, `kykim/electra-kor-base`, `monologg/ko-electra-base-v3-discriminator`, `jhgan/ko-sroberta-multitask`, `FacebookAI/roberta-large-rtt`, `deliciouscat/kf-deberta-base-cross-sts`, `sorryhyun-sentence-embedding-klue-large` |
-| 앙상블    | `soft voting`, `Nested Ensemble`|
+| 앙상블 | `soft voting`, `Nested Ensemble`, `Bagging`|
 
 ### 📊 Dataset
 - 데이터 증강 과정에서 라벨 분포를 균형있게 맞추고자 라벨별 증강비율을 조정하였습니다.

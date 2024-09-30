@@ -1,10 +1,15 @@
 *.pt
 *.pyc
+*.ckpt
+*.pth
 
-ETC/openvpn*
-BaseCode/code/lightning_logs
 BaseCode/
-src/lightning_logs/
+ETC/
 src/checkpoint/
+src/csv_ensemble/*.csv
+src/data/*.csv
+src/lightning_logs/
+src/model/*.pt
+src/model/*.ckpt
+!src/output/sample_submission.csv
 src/output/*.csv
-data/*.csv

@@ -1,0 +1,59 @@
+path:
+  train_path: data/train.csv # -> Train csv file path
+  val_path: data/dev.csv
+  dev_path: data/dev.csv
+  predict_path: data/test.csv # -> Test csv file path
+
+  checkpoint_path: checkpoint/ # -> Checkpoint save path
+  output_path: output/ # -> Output csv save path
+  ensemble_output_path: csv_ensemble/ # -> Output csv save path
+  submission_path: output/sample_submission.csv # -> Sample submission csv file path
+
+# List of model names to use.
+model:
+#  model_name_11: team-lucid/deberta-v3-xlarge-korean
+#  model_name_2: snunlp/KR-ELECTRA-discriminator
+#  model_name_5: FacebookAI/xlm-roberta-large
+  model_name_13: deliciouscat/kf-deberta-base-cross-sts
+#  model_name_14: sorryhyun-sentence-embedding-klue-large
+#  model_name_15 : upskyy-kf-deberta-multitask
+
+#  model_name_1: beomi/KcELECTRA-base
+
+#  model_name_3: jhgan/ko-sroberta-multitask
+#  model_name_4: sentence-transformers/all-MiniLM-L6-v2
+
+#  model_name_6: monologg/koelectra-base-v3-discriminator
+#  model_name_7: kakaobank/kf-deberta-base
+
+#  model_name_8: intfloat/multilingual-e5-large-instruct
+#  model_name_9: Jaume/gemma-2b-embeddings # 2 Billion Param Model, Very big
+#  model_name_10: bespin-global/klue-sroberta-base-continue-learning-by-mnr
+#  model_name_11: setu4993/LaBSE
+
+  ensemble_weight: [1,1,1,1,1,1,1,1]
+
+aug_list:
+    beomi/KcELECTRA-base: [swap]
+    snunlp/KR-ELECTRA-discriminator: [swap]
+    jhgan/ko-sroberta-multitask: [swap]
+    sentence-transformers/all-MiniLM-L6-v2: [swap]
+    FacebookAI/xlm-roberta-large: [swap, delete]
+    monologg/koelectra-base-v3-discriminator: [swap]
+    kakaobank/kf-deberta-base: [swap]
+    intfloat/multilingual-e5-large-instruct: []
+    Jaume/gemma-2b-embeddings: []
+    bespin-global/klue-sroberta-base-continue-learning-by-mnr: [swap]
+    team-lucid/deberta-v3-xlarge-korean : [swap]
+    setu4993/LaBSE : [swap]
+    sorryhyun/sentence-embedding-klue-large : []
+    deliciouscat/kf-deberta-base-cross-sts : [swap]
+
+hyperparameters:
+  seed: 0
+  num_labels: 1
+  num_workers: 8
+  batch_size: 16
+  max_length: 128
+  max_epoch: 20
+  learning_rate: 1e-5
