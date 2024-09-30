@@ -82,8 +82,8 @@
 
 |버전| 설명 |크기|
 |---| --- |---|
-| original_train_V1 | 원래 훈련 데이터셋  |9324|
-| augmentation_train_V2 | SWAP, label 0 언더샘플링 + label 5 오버샘플링 |28722|
+| original_train_V1 | 원본 데이터  |9324|
+| augmentation_train_V2 | `SWAP`, `label 0 언더샘플링` + `label 5 오버샘플링` |28722|
 
 
 (이미지)
