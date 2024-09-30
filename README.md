@@ -4,41 +4,29 @@
 
 </div>
 
-
-  ## ✏️ 대회 소개
-  |특징| 설명 |
-  |:---:| --- |
-  | 대회 주제 | 네이버 부스트캠프 AI-Tech 7기 NLP트랙의 level 1 도메인 기초 대회 |
-  | 대회 설명 | 두 문장이 주어졌을 때 두 문장에 대한 STS(Semantic Text Simliarity)를 추론하는 대회로 Kaggle과 Dacon과 같이 competition 형태 |
-  | 데이터 구성 | 데이터는 slack 대화, 네이버 영화 후기, 국민 청원 문장으로 구성. Train(9324개), Dev(550개), Test(1100개) |
-  | 평가 지표 | 모델의 평가지표는 피어슨 상관계수(Pearson correlation coefficient)로 측정 |
-
-  
-  ## 🎖️ Leader Board
-  ### 🥈 Public Leader Board (2위)
-
- (이미지)
-  
-
-  
-  ### 🥉 Private Leader Board (3위)
-
- (이미지)
+## ✏️ 대회 소개
+| 특징 | 설명 |
+|:---:| --- |
+| 대회 주제 | 네이버 부스트캠프 AI-Tech 7기 NLP트랙의 level 1 도메인 기초 대회 |
+| 대회 설명 | 두 문장이 주어졌을 때 두 문장에 대한 STS(Semantic Text Simliarity)를 추론하는 대회로 Kaggle과 Dacon과 같이 competition 형태 |
+| 데이터 구성 | 데이터는 slack 대화, 네이버 영화 후기, 국민 청원 문장으로 구성. Train(9324개), Dev(550개), Test(1100개) |
+| 평가 지표 | 모델의 평가지표는 피어슨 상관계수(Pearson correlation coefficient)로 측정 |
 
 
+## 🎖️ Leader Board
+### 🥈 Public Leader Board (2위)
+<img src="https://github.com/user-attachments/assets/87e0c78b-b426-4af4-a479-1517bc54d6f1" width="1000"></img>
 
+### 🥉 Private Leader Board (3위)
+<img src="https://github.com/user-attachments/assets/29f19cf4-f7d1-48ed-9a71-dc75a4cb947e" width="1000"></img>
 
 ## 👨‍💻 15조가십오조 멤버
-
 |김진재 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/jin-jae)| 박규태 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/doraemon500)|윤선웅 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/ssunbear)|이정민 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/simigami)|임한택 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/LHANTAEK)|
 |:-:|:-:|:-:|:-:|:-:|
 |<img src='https://avatars.githubusercontent.com/u/97018331' height=125 width=125></img>|<img src='https://avatars.githubusercontent.com/u/64678476' height=125 width=125></img>|<img src='https://avatars.githubusercontent.com/u/117508164' height=125 width=125></img>|<img src='https://avatars.githubusercontent.com/u/46891822' height=125 width=125></img>|<img src='https://avatars.githubusercontent.com/u/143519383' height=125 width=125></img>|
 
-
-
   
 ## 👼 역할 분담
-
 |팀원| 역할 |
 |---| --- |
 | 김진재 | EDA, 방법론 제안, 협업 환경 및 베이스라인 관리, 모델 탐색, 증강 기법 및 전처리 실험, 앙상블 코드 작성 및 실험 |
@@ -48,10 +36,7 @@
 | 임한택 | EDA, 모델 탐색, 모델에 대한 증강 기법 및 전처리 실험,  앙상블 코드 작성 및 실험, Stacking 모델 실험|
 
 
-
-
 ## 🏃 프로젝트
-
 ### 🖥️ 프로젝트 개요
 |개요| 설명 |
 |:----:| --- |
@@ -63,12 +48,10 @@
 
 ### 📅 프로젝트 타임라인
 - 프로젝트는 2024-09-11 ~ 2024-09-27까지 진행되었습니다.
-
-(이미지)
+![Project Timeline](https://github.com/user-attachments/assets/fc70c368-0d80-4e96-ae33-4ae5769fe7be)
 
 ### 🕵️ 프로젝트 진행
 - 프로젝트를 진행하며 단계별로 실험하여 적용한 내용들을 아래와 같습니다.
-
 |프로세스| 설명 |
 |:---:| --- |
 | EDA | 데이터 분포 분석, Baseline 모델 예측과 실제값 차이 분석  |
@@ -77,16 +60,13 @@
 | 모델 선정 | `upskyy/kf-deberta-multitask`, `team-lucid/deberta-v3-xlarge-korean`, `snunlp/KR-ELECTRA-discriminator`, `kykim/electra-kor-base`, `monologg/ko-electra-base-v3-discriminator`, `jhgan/ko-sroberta-multitask`, `FacebookAI/roberta-large-rtt`, `deliciouscat/kf-deberta-base-cross-sts`, `sorryhyun-sentence-embedding-klue-large` |
 | 앙상블 | `soft voting`, `Nested Ensemble`|
 
-### 📊 DataSet
+### 📊 Dataset
 - 데이터 증강 과정에서 라벨 분포를 균형있게 맞추고자 라벨별 증강비율을 조정하였습니다.
 
 |버전| 설명 |크기|
 |---| --- |---|
 | original_train_V1 | 원본 데이터  |9324|
 | augmentation_train_V2 | `SWAP`, `label 0 언더샘플링` + `label 5 오버샘플링` |28722|
-
-
-(이미지)
 
 ### 🤖 Ensemble Model
 - 최종적으로 16개의 모델을 앙상블에 사용했습니다.
@@ -111,7 +91,29 @@
 |snunlp-KR-ELECTRA-discriminator|0.9336|1e-5| 16 |augmentation_train_V2|
 
 
-## 📁프로젝트 구조  
+## 📁 프로젝트 구조
+
+```
+📁 level1-semantictextsimilarity-nlp-15
+├── README.md
+├── requirements.txt
+└── src
+    ├── bagging.py
+    ├── config.yaml
+    ├── csv_ensemble
+    ├── data
+    ├── ensemble.py
+    ├── inference.py
+    ├── model
+    │   └── model.py
+    ├── output
+    ├── run.py
+    ├── train.py
+    └── util
+        ├── data_augmentation.py
+        └── util.py
+```
+
 ### src 폴더 구조 설명
 
 - augmentation : 데이터 증강 관련 코드
@@ -133,12 +135,9 @@
 5. 빠진 파일들은 gitignore를 잘 확인해주세요
 6. 오류나 질문 등은 카톡이나 git issue를 통해 남겨주세요
 
-  
 ### Git 관련
-
 1. Commit Message Convention은 다음 사이트를 참조하여 보내시면 됩니다.<br>https://github.com/joelparkerhenderson/git-commit-message?tab=readme-ov-file#top-priorities
 2. Branch Convention은 추후 추가하도록 하겠습니다.
-
 
 ### Installation
 1. pip install -r requirements.txt
@@ -146,5 +145,3 @@
 3. Put sample_submission.csv at /src/output directory
 4. Set models and augmentation methods on config.yaml
 5. Execute run.py
-
-
