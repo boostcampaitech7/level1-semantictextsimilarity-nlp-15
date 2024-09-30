@@ -39,19 +39,19 @@
 <div align='center'>
 
 |팀원| 역할 |
-  |---| --- |
-  | 김진재 | EDA, 방법론 제안, 협업 환경 및 베이스라인 관리, 모델 탐색, 증강 기법 및 전처리 실험, 앙상블 코드 작성 및 실험 |
-  | 박규태 | EDA, 모델 탐색, 데이터 증강 및 앙상블 기법에 대한 실험, Bagging 기법 코드 작성 및 실험 |
-  | 윤선웅 | EDA, 협업 환경 및 베이스라인 관리, 데이터 분포 및 재분할 총괄, 모델 탐색, 데이터 증강 실험, 앙상블 코드 작성 및 실험 |
-  | 이정민 | EDA, 모델 탐색, 모델에 대한 증강 기법 및 전처리 실험, KoEDA 증강 실험, K-Fold Validation 실험 |
-  | 임한택 | EDA, 모델 탐색, 모델에 대한 증강 기법 및 전처리 실험,  앙상블 코드 작성 및 실험, Stacking 모델 실험 |
+|---| --- |
+| 김진재 | EDA, 방법론 제안, 협업 환경 및 베이스라인 관리, 모델 탐색, 증강 기법 및 전처리 실험, 앙상블 코드 작성 및 실험 |
+| 박규태 | EDA, 모델 탐색, 데이터 증강 및 앙상블 기법에 대한 실험, Bagging 기법 코드 작성 및 실험 |
+| 윤선웅 | EDA, 협업 환경 및 베이스라인 관리, 데이터 분포 및 재분할 총괄, 모델 탐색, 데이터 증강 실험, 앙상블 코드 작성 및 실험 |
+| 이정민 | EDA, 모델 탐색, 모델에 대한 증강 기법 및 전처리 실험, KoEDA 증강 실험, K-Fold Validation 실험 |
+| 임한택 | EDA, 모델 탐색, 모델에 대한 증강 기법 및 전처리 실험,  앙상블 코드 작성 및 실험, Stacking 모델 실험 |
 </div>
 
 
 ## 🏃 프로젝트
 ### 🖥️ 프로젝트 개요
 |개요| 설명 |
-|:----:| --- |
+|:------:| --- |
 | 주제 | `STS(Semantic Text Similarity)` : 두 문장의 유사도 정도를 수치로 추론하는 Task |
 | 목표 | 두 문장(sentence1, sentence2)이 주어졌을 때, 이 두 문장의 유사도를 0~5사이의 점수로 추론한는 AI 모델 제작 |
 | 평가 지표 | 실제 값과 예측값의 피어슨 상관 계수(Pearson Correlation Coefficient) |
@@ -83,7 +83,7 @@
 - 데이터 증강 과정에서 라벨 분포를 균형있게 맞추고자 라벨별 증강비율을 조정하였습니다.
 
 |버전| 설명 |크기|
-|---| --- |---|
+|:-------------------:| --- |---|
 | original_train_V1 | 원본 데이터  |9324|
 | augmentation_train_V2 | `SWAP`, `label 0 언더샘플링` + `label 5 오버샘플링` |28722|
 
@@ -134,7 +134,7 @@
         └── util.py
 ```
 
-### src 폴더 구조 설명
+### 📦 src 폴더 구조 설명
 
 - checkpoint : 체크포인트 파일(ckpt) 저장 폴더
 - csv_ensemble : 앙상블이 된 csv 결과물 저장 폴더
@@ -148,13 +148,13 @@
 - inference.py : 추론을 실행하는 코드
 - ensemble.py : 앙상블을 실행하는 코드
 
-### 보충 설명
+### 📁 보충 설명
 1. path, 하이퍼파라미터 값과 같은 것은 전부 config.yaml에서 관리합니다.
 2. config.yaml에 존재하는 모델 목록이 전부 run.py에서 for문을 돌려서 학습을 진행합니다.<br>따라서 모델을 변경할 때 yaml에 주석을 이용해주세요
 3. 앙상블은 config.yaml의 ensemble_weight을 잘 조절해 주세요. 길이가 다르면 자동으로 Soft Voting을 진행합니다.
 4. 오류나 질문은 git issue를 통해 남겨주세요
 
-### Installation
+### 📦 Installation
 1. pip install -r requirements.txt
 2. Put train, dev, test csv files at /src/data directory
 3. Put sample_submission.csv at /src/output directory
