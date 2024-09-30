@@ -6,7 +6,7 @@
 BaseCode/
 ETC/
 src/checkpoint/
-src/csv_ensemble/
+src/csv_ensemble/*.csv
 src/data/
 src/lightning_logs/
 src/model/*.pt
