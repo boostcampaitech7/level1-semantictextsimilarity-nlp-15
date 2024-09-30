@@ -3,7 +3,7 @@
 *.ckpt
 *.pth
 
-BaseCode/code/lightning_logs/
+BaseCode/
 ETC/
 src/checkpoint/
 src/csv_ensemble/
