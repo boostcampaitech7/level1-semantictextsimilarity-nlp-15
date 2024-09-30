@@ -1,11 +1,11 @@
 <div align='center'>
 
-# LV.1 NLP 기초 프로젝트 : 문맥적 유사도 측정 (STS)
+# 🏆 LV.1 NLP 기초 프로젝트 : 문맥적 유사도 측정 (STS)
 
 </div>
 
 
-  ## ✏️대회 소개
+  ## ✏️ 대회 소개
   |특징| 설명 |
   |:---:| --- |
   | 대회 주제 | 네이버 부스트캠프 AI-Tech 7기 NLP트랙의 level 1 도메인 기초 대회 |
@@ -14,8 +14,8 @@
   | 평가 지표 | 모델의 평가지표는 피어슨 상관계수(Pearson correlation coefficient)로 측정 |
 
   
-  ## 🎖️Leader Board
-  ### 🥈  Public Leader Board (2위)
+  ## 🎖️ Leader Board
+  ### 🥈 Public Leader Board (2위)
 
  (이미지)
   
@@ -28,7 +28,7 @@
 
 
 
-## 15조가십오조 멤버
+## 👨‍💻 15조가십오조 멤버
 
 |김진재 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/jin-jae)| 박규태 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/doraemon500)|윤선웅 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/ssunbear)|이정민 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/simigami)|임한택 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/LHANTAEK)|
 |:-:|:-:|:-:|:-:|:-:|
@@ -37,7 +37,7 @@
 
 
   
-## 역할 분담
+## 👼 역할 분담
 
 |팀원| 역할 |
 |---| --- |
@@ -50,7 +50,7 @@
 
 
 
-## 프로젝트
+## 🏃 프로젝트
 
 ### 🖥️ 프로젝트 개요
 |개요| 설명 |
@@ -111,7 +111,7 @@
 |snunlp-KR-ELECTRA-discriminator|0.9336|1e-5| 16 |augmentation_train_V2|
 
 
-## 프로젝트 구조  
+## 📁프로젝트 구조  
 ### src 폴더 구조 설명
 
 - augmentation : 데이터 증강 관련 코드
