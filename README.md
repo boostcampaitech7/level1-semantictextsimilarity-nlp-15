@@ -1,10 +1,11 @@
 <div align='center'>
 
-# 🏆 LV.1 NLP 기초 프로젝트 : 문맥적 유사도 측정 (STS)
+  # 🏆 LV.1 NLP 기초 프로젝트 : 문맥적 유사도 측정 (STS)
 
 </div>
 
 ## ✏️ 대회 소개
+
 | 특징 | 설명 |
 |:---:| --- |
 | 대회 주제 | 네이버 부스트캠프 AI-Tech 7기 NLP트랙의 level 1 도메인 기초 대회 |
@@ -15,25 +16,36 @@
 
 ## 🎖️ Leader Board
 ### 🥈 Public Leader Board (2위)
-<img src="https://github.com/user-attachments/assets/87e0c78b-b426-4af4-a479-1517bc54d6f1" width="1000"></img>
+<div align='center'>
+<img src="https://github.com/user-attachments/assets/87e0c78b-b426-4af4-a479-1517bc54d6f1" width="1000" />
+</div>
 
 ### 🥉 Private Leader Board (3위)
-<img src="https://github.com/user-attachments/assets/29f19cf4-f7d1-48ed-9a71-dc75a4cb947e" width="1000"></img>
+<div align='center'>
+<img src="https://github.com/user-attachments/assets/29f19cf4-f7d1-48ed-9a71-dc75a4cb947e" width="1000" />
+</div>
 
 ## 👨‍💻 15조가십오조 멤버
+<div align='center'>
+  
 |김진재 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/jin-jae)| 박규태 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/doraemon500)|윤선웅 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/ssunbear)|이정민 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/simigami)|임한택 [<img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FCd4TO%2FbtrUN1rc7Qa%2F3YbSSdRdD020FpAb9R88h0%2Fimg.png" width="20" style="vertical-align:middle;">](https://github.com/LHANTAEK)|
 |:-:|:-:|:-:|:-:|:-:|
 |<img src='https://avatars.githubusercontent.com/u/97018331' height=125 width=125></img>|<img src='https://avatars.githubusercontent.com/u/64678476' height=125 width=125></img>|<img src='https://avatars.githubusercontent.com/u/117508164' height=125 width=125></img>|<img src='https://avatars.githubusercontent.com/u/46891822' height=125 width=125></img>|<img src='https://avatars.githubusercontent.com/u/143519383' height=125 width=125></img>|
 
+</div>
+
   
 ## 👼 역할 분담
+<div align='center'>
+
 |팀원| 역할 |
-|---| --- |
-| 김진재 | EDA, 방법론 제안, 협업 환경 및 베이스라인 관리, 모델 탐색, 증강 기법 및 전처리 실험, 앙상블 코드 작성 및 실험 |
-| 박규태 | EDA, 모델 탐색, 데이터 증강 및 앙상블 기법에 대한 실험, Bagging 기법 코드 작성 및 실험 |
-| 윤선웅 | EDA, 협업 환경 및 베이스라인 관리, 데이터 분포 및 재분할 총괄, 모델 탐색, 데이터 증강 실험, 앙상블 코드 작성 및 실험 |
-| 이정민 | EDA, 모델 탐색, 모델에 대한 증강 기법 및 전처리 실험, KoEDA 증강 실험, K-Fold Validation 실험 |
-| 임한택 | EDA, 모델 탐색, 모델에 대한 증강 기법 및 전처리 실험,  앙상블 코드 작성 및 실험, Stacking 모델 실험|
+  |---| --- |
+  | 김진재 | EDA, 방법론 제안, 협업 환경 및 베이스라인 관리, 모델 탐색, 증강 기법 및 전처리 실험, 앙상블 코드 작성 및 실험 |
+  | 박규태 | EDA, 모델 탐색, 데이터 증강 및 앙상블 기법에 대한 실험, Bagging 기법 코드 작성 및 실험 |
+  | 윤선웅 | EDA, 협업 환경 및 베이스라인 관리, 데이터 분포 및 재분할 총괄, 모델 탐색, 데이터 증강 실험, 앙상블 코드 작성 및 실험 |
+  | 이정민 | EDA, 모델 탐색, 모델에 대한 증강 기법 및 전처리 실험, KoEDA 증강 실험, K-Fold Validation 실험 |
+  | 임한택 | EDA, 모델 탐색, 모델에 대한 증강 기법 및 전처리 실험,  앙상블 코드 작성 및 실험, Stacking 모델 실험 |
+</div>
 
 
 ## 🏃 프로젝트
@@ -48,10 +60,17 @@
 
 ### 📅 프로젝트 타임라인
 - 프로젝트는 2024-09-11 ~ 2024-09-27까지 진행되었습니다.
+
+<div align='center'>
+
 ![Project Timeline](https://github.com/user-attachments/assets/fc70c368-0d80-4e96-ae33-4ae5769fe7be)
+
+</div>
 
 ### 🕵️ 프로젝트 진행
 - 프로젝트를 진행하며 단계별로 실험하여 적용한 내용들을 아래와 같습니다.
+
+
 |프로세스| 설명 |
 |:---:| --- |
 | EDA | 데이터 분포 분석, Baseline 모델 예측과 실제값 차이 분석  |
