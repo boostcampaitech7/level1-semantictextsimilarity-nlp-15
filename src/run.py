@@ -13,6 +13,8 @@ from ensemble import ensemble
 from train import train
 from inference import inference
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 def set_parser_and_model():
     with open(os.path.join('config.yaml')) as f:
         configs = yaml.safe_load(f)
