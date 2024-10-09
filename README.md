@@ -61,8 +61,8 @@
 - 프로젝트는 2024-09-11 ~ 2024-09-27까지 진행되었습니다.
 
 <div align='center'>
-![Project Timeline](https://github.com/user-attachments/assets/fc70c368-0d80-4e96-ae33-4ae5769fe7be)
 
+<img src="https://github.com/user-attachments/assets/fc70c368-0d80-4e96-ae33-4ae5769fe7be" width="800" />
 </div>
 
 ### 🕵️ 프로젝트 진행
